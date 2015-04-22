@@ -1,5 +1,7 @@
 package easybible
 
+import "dataloader"
+
 type HeaderContext struct {
 	Title   string
 	Scripts []string
@@ -13,6 +15,12 @@ type FooterContext struct {
 type IndexContext struct {
 	Header HeaderContext
 	Footer FooterContext
+	Bible  dataloader.Bible
+	Dump   interface{}
+}
+
+type AutocompleteContext struct {
+	PersistedChapters []dataloader.PersistedChapter
 }
 
 func DefaultHeaderContext() HeaderContext {
@@ -33,4 +41,8 @@ func NewIndexContext() *IndexContext {
 	c.Header.Styles = append(c.Header.Styles, "/static/css/index.css")
 
 	return c
+}
+
+func NewAutocompleteContext(c []dataloader.PersistedChapter) *AutocompleteContext {
+	return &AutocompleteContext{c}
 }

@@ -1,0 +1,9 @@
+<div class="autocompleteContainer">
+	{{range .PersistedChapters}}
+		<div class="autocompleteRow">
+			<div>Book {{.BookLongName}}</div>
+			<div>Chapter {{.ChapterNumber}}</div>
+			<div style="opacity:0.3;">{{.}}</div>
+		</div>
+	{{end}}
+</div>
