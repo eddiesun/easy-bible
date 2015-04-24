@@ -7,11 +7,9 @@ import (
 	"net/http"
 
 	"appengine"
-	_ "appengine/datastore"
-	_ "appengine/user"
 
 	"dataloader"
-	_ "search"
+	"search"
 )
 
 func init() {
@@ -43,29 +41,24 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func autocompleteHandler(w http.ResponseWriter, r *http.Request) {
-	/*
-		c := appengine.NewContext(r)
+	c := appengine.NewContext(r)
+	c.Debugf("\n\n\n***** New Autocomplete Request *****\n")
 
-		userQuery := r.URL.Query().Get("query")
-		// userQuery := "亞8213"
-		s := search.NewSearch(userQuery, c)
+	userQuery := r.URL.Query().Get("query")
+	// userQuery := "亞8213"
+	s, err := search.NewSearch(userQuery, c)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 
-		qos := s.GetQueryOptions()
+	// fmt.Fprintf(w, "Search: %+v\n\n", s)
 
-		for _, qo := range qos {
-			vs, err := dataloader.Query(c, &qo)
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusInternalServerError)
-			}
-			c.Debugf("qo: %+v\n", qo)
-			s.AddAutocompleteData(vs, qo, c)
-		}
+	view := template.Must(template.ParseFiles("view/autocomplete.html"))
+	if err := view.Execute(w, NewAutocompleteContext(s.GetAutocompleteResult())); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 
-		view := template.Must(template.ParseFiles("view/autocomplete.html"))
-		if err := view.Execute(w, NewAutocompleteContext(s.GetAutocompleteResult())); err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
-	*/
+	// fmt.Fprintf(w, "auto result:\n%+v\n", result)
 }
 
 func loadHandler(w http.ResponseWriter, r *http.Request) {

@@ -77,6 +77,7 @@ type (
 	// }
 
 	QueryOptions struct {
+		Type          string
 		BookId        int
 		BookShortName string
 		ChapterNumber int
@@ -201,6 +202,13 @@ func (bc *BibleCollection) Persist(c appengine.Context, w http.ResponseWriter) e
 	return nil
 }
 
+func GetAllBooks(c appengine.Context) ([]PBook, error) {
+	q := datastore.NewQuery("Book")
+	books := make([]PBook, 0)
+	_, err := q.GetAll(c, &books)
+	return books, err
+}
+
 // func NewPersistedVerse(bible *Bible, book *Book, chapter *Chapter, verse *Verse) *PersistedVerse {
 // 	return &PersistedVerse{
 // 		BibleVersion:  bible.Version,
@@ -213,7 +221,6 @@ func (bc *BibleCollection) Persist(c appengine.Context, w http.ResponseWriter) e
 // 		VerseText:     verse.Text,
 // 	}
 // }
-
 /*
 func Query(c appengine.Context, qo *QueryOptions) ([]PersistedVerse, error) {
 	q := datastore.NewQuery("Bible")

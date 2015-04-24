@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bible version="和合本">
-	<book id="8" shortName="得" name="路得記" pinyin="lu de ji">
+	<book id="8" shortName="得" name="路得記" pinyin="ludeji">
 		<chapter number="1">
 			<verse number="1">當士師秉政的時候，國中遭遇饑荒。在猶大、伯利恆，有一個人帶著妻子和兩個兒子往摩押地去寄居。</verse>
 			<verse number="2">這人名叫以利米勒，他的妻名叫拿俄米；他兩個兒子，一個名叫瑪倫，一個名叫基連，都是猶大伯利恆的以法他人。他們到了摩押地，就住在那裡。</verse>
@@ -95,7 +95,7 @@
 			<verse number="22">俄備得生耶西；耶西生大衛。</verse>
 		</chapter>
 	</book>
-	<book id="38" shortName="亞" name="撒迦利亞書" pinyin="sa jia li ya shu">
+	<book id="38" shortName="亞" name="撒迦利亞書" pinyin="sajialiyashu">
 		<chapter number="1">
 			<verse number="1">大利烏王第二年八月，耶和華的話臨到易多的孫子、比利家的兒子先知撒迦利亞，說：</verse>
 			<verse number="2">耶和華曾向你們列祖大大發怒。</verse>

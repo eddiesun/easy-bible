@@ -23,7 +23,7 @@ type IndexContext struct {
 }
 
 type AutocompleteContext struct {
-	Result map[string]*search.AutocompleteResult
+	Result *[]search.AutocompleteResult
 }
 
 func DefaultHeaderContext() HeaderContext {
@@ -46,6 +46,6 @@ func NewIndexContext() *IndexContext {
 	return c
 }
 
-func NewAutocompleteContext(c map[string]*search.AutocompleteResult) *AutocompleteContext {
-	return &AutocompleteContext{c}
+func NewAutocompleteContext(c *[]search.AutocompleteResult) AutocompleteContext {
+	return AutocompleteContext{c}
 }
