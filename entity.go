@@ -1,6 +1,9 @@
 package easybible
 
-import "dataloader"
+import (
+	"dataloader"
+	"search"
+)
 
 type HeaderContext struct {
 	Title   string
@@ -20,7 +23,7 @@ type IndexContext struct {
 }
 
 type AutocompleteContext struct {
-	PersistedChapters []dataloader.PersistedChapter
+	Result map[string]*search.AutocompleteResult
 }
 
 func DefaultHeaderContext() HeaderContext {
@@ -43,6 +46,6 @@ func NewIndexContext() *IndexContext {
 	return c
 }
 
-func NewAutocompleteContext(c []dataloader.PersistedChapter) *AutocompleteContext {
+func NewAutocompleteContext(c map[string]*search.AutocompleteResult) *AutocompleteContext {
 	return &AutocompleteContext{c}
 }

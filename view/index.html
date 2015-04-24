@@ -5,13 +5,14 @@
 		<div class="col-xs-12">
 			<form class="form-inline" style="width:100%; overflow:hidden;">
 				<div style="float:right;">
-					<button type="submit" class="btn btn-primary" style="width:60px;">
+					<button id="searchButton" class="btn btn-primary" style="width:60px;">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					</button>
 				</div>
 				<div style="overflow:hidden; padding-right:5px;">
-					<input type="text" class="form-control" style="width:100%;" id="searchInput" placeholder="Search... example: yuehan316">
+					<input id="searchInput" type="text" class="form-control" style="width:100%;" id="searchInput" placeholder="Search... example: yuehan316">
 				</div>
+				<div id="autocomplete"></div>
 			</form>
 		</div>
 	</div>
