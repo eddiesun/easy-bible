@@ -5,14 +5,13 @@ import (
 	"appengine/datastore"
 	"encoding/json"
 	"encoding/xml"
-	"fmt"
-	"net/http"
-	"strconv"
+	"io/ioutil"
+	"time"
 )
 
 type (
 	BibleCollection struct {
-		Bibles map[string]Bible
+		Bibles map[string]*Bible
 	}
 
 	Bible struct {
@@ -64,36 +63,11 @@ type (
 		VerseNumber   int
 		Text          string
 	}
-
-	// PersistedVerse struct {
-	// 	BibleVersion  string
-	// 	BookId        int
-	// 	BookShortName string
-	// 	BookLongName  string
-	// 	BookOtherName string
-	// 	ChapterNumber int
-	// 	VerseNumber   int
-	// 	VerseText     string
-	// }
-
-	QueryOptions struct {
-		Type          string
-		BookId        int
-		BookShortName string
-		ChapterNumber int
-		VerseFrom     int
-		VerseTo       int
-		OrderBy       string
-		Project       []string
-		Limit         int
-	}
 )
 
-func UnmarshalBibleXml(biblexml []byte, w http.ResponseWriter) (*Bible, error) {
+func UnmarshalBibleXml(biblexml []byte) (*Bible, error) {
 	var bible Bible
-
 	err := xml.Unmarshal(biblexml, &bible)
-
 	return &bible, err
 }
 
@@ -105,166 +79,65 @@ func (bible *Bible) ToJson() []byte {
 	return j
 }
 
-func (bc *BibleCollection) Add(b *Bible) {
-	if bc.Bibles == nil {
-		bc.Bibles = make(map[string]Bible)
-	}
-	bc.Bibles[b.Version] = *b
-}
-
-// func Key(c appengine.Context, bc *BibleCollection, bibleVersion string, bookId int, chapterNum int, verseNum int) *datastore.Key {
-// 	key := bibleVersion + "-" + strconv.Itoa(bookId) + "-" + strconv.Itoa(chapterNum) + "-" + strconv.Itoa(verseNum)
-// 	return datastore.NewKey(c, "Bible", key, 0, nil)
-// }
-
-func (bc *BibleCollection) Persist(c appengine.Context, w http.ResponseWriter) error {
-	// Persist Bibles
-	for _, bible := range bc.Bibles {
-		fmt.Fprintf(w, "Persisting Bible: %v\n", bible.Version)
-		c.Infof("Persisting Bible: %v\n", bible.Version)
-		pb := &PBible{
-			Type:    "Bible",
-			Key:     datastore.NewKey(c, "Bible", "Bible-"+bible.Version, 0, nil),
-			Version: bible.Version,
-		}
-		_, err := datastore.Put(c, pb.Key, pb)
-		if err != nil {
-			return err
-		}
-
-		// Persist Books
-		for _, book := range bible.Books {
-			fmt.Fprintf(w, "    Persisting Book: %v ...... ", book.LongName)
-			c.Infof("    Persisting Book: %v ", book.LongName)
-			pbk := &PBook{
-				Type:         "Book",
-				Key:          datastore.NewKey(c, "Book", "Book-"+pb.Version+"-"+strconv.Itoa(book.Id), 0, pb.Key),
-				BibleVersion: pb.Version,
-				Id:           book.Id,
-				ShortName:    book.ShortName,
-				LongName:     book.LongName,
-				OtherName:    book.OtherName,
-			}
-			_, err := datastore.Put(c, pbk.Key, pbk)
-			if err != nil {
-				return err
-			}
-
-			// Persist Chapters
-			//     Batch Chapters and Verses
-			batchChapterKey := make([]*datastore.Key, 0)
-			batchChapterStruct := make([]*PChapter, 0)
-			batchVerseKey := make([]*datastore.Key, 0)
-			batchVerseStruct := make([]*PVerse, 0)
-			for _, chapter := range book.Chapters {
-				pc := &PChapter{
-					Type:          "Chapter",
-					Key:           datastore.NewKey(c, "Chapter", "Chapter-"+pb.Version+"-"+strconv.Itoa(pbk.Id)+"-"+strconv.Itoa(chapter.Number), 0, pbk.Key),
-					BookId:        pbk.Id,
-					ChapterNumber: chapter.Number,
-				}
-				batchChapterKey = append(batchChapterKey, pc.Key)
-				batchChapterStruct = append(batchChapterStruct, pc)
-
-				// Persist Verses
-				for _, verse := range chapter.Verses {
-					pv := &PVerse{
-						Type:          "Verse",
-						Key:           datastore.NewKey(c, "Verse", "Verse-"+pb.Version+"-"+strconv.Itoa(pbk.Id)+"-"+strconv.Itoa(pc.ChapterNumber)+"-"+strconv.Itoa(verse.Number), 0, pc.Key),
-						ChapterNumber: pc.ChapterNumber,
-						VerseNumber:   verse.Number,
-						Text:          verse.Text,
-					}
-					batchVerseKey = append(batchVerseKey, pv.Key)
-					batchVerseStruct = append(batchVerseStruct, pv)
-				}
-			}
-			_, err = datastore.PutMulti(c, batchVerseKey, batchVerseStruct)
-			if err != nil {
-				return err
-			}
-			_, err = datastore.PutMulti(c, batchChapterKey, batchChapterStruct)
-			if err != nil {
-				return err
-			}
-			fmt.Fprintf(w, "Done\n")
-			c.Infof("    Done")
-
-			// flush to browser
-			if flusher, ok := w.(http.Flusher); ok {
-				flusher.Flush()
-			}
-		}
-		fmt.Fprintf(w, "Finished Persisting Bible: %v\n", bible.Version)
-		c.Infof("Finished Persisting Bible: %v\n", bible.Version)
-
+func (bible *Bible) Book(bookId int) *Book {
+	if bookId >= 1 && bookId <= len(bible.Books) {
+		return &bible.Books[bookId-1]
 	}
 	return nil
 }
 
-func GetAllBooks(c appengine.Context) ([]PBook, error) {
-	q := datastore.NewQuery("Book")
-	books := make([]PBook, 0)
-	_, err := q.GetAll(c, &books)
-	return books, err
+func (b *Book) Chapter(number int) *Chapter {
+	if number > len(b.Chapters) {
+		return nil
+	}
+	if number == 0 {
+		number = 1
+	}
+	return &b.Chapters[number-1]
 }
 
-// func NewPersistedVerse(bible *Bible, book *Book, chapter *Chapter, verse *Verse) *PersistedVerse {
-// 	return &PersistedVerse{
-// 		BibleVersion:  bible.Version,
-// 		BookId:        book.Id,
-// 		BookShortName: book.ShortName,
-// 		BookLongName:  book.LongName,
-// 		BookOtherName: book.OtherName,
-// 		ChapterNumber: chapter.Number,
-// 		VerseNumber:   verse.Number,
-// 		VerseText:     verse.Text,
-// 	}
-// }
-/*
-func Query(c appengine.Context, qo *QueryOptions) ([]PersistedVerse, error) {
-	q := datastore.NewQuery("Bible")
-
-	if qo.BookId != 0 {
-		q = q.Filter("BookId =", qo.BookId)
+func (c *Chapter) GetVerses(from int, to int) []Verse {
+	if from > len(c.Verses) {
+		return nil
 	}
-
-	if qo.BookShortName != "" {
-		q = q.Filter("BookShortName =", qo.BookShortName)
+	if from == 0 {
+		from = 1
 	}
-
-	if qo.ChapterNumber != 0 {
-		q = q.Filter("ChapterNumber =", qo.ChapterNumber)
+	if to == 0 || to > len(c.Verses) {
+		to = len(c.Verses)
 	}
+	return c.Verses[from-1 : to]
+}
 
-	if qo.VerseFrom != 0 {
-		q = q.Filter("VerseNumber >=", qo.VerseFrom)
+func (bc *BibleCollection) Add(b *Bible) {
+	if bc.Bibles == nil {
+		bc.Bibles = make(map[string]*Bible)
 	}
+	bc.Bibles[b.Version] = b
+}
 
-	if qo.VerseTo != 0 {
-		q = q.Filter("VerseNumber <=", qo.VerseTo)
-	}
+func LoadXmlBible(c appengine.Context, pathToBibleXml string) (*Bible, error) {
+	timeStart := time.Now()
+	defer c.Infof("    Loading xml bible took %s \n", time.Since(timeStart))
 
-	if qo.OrderBy != "" {
-		q = q.Order(qo.OrderBy)
-	} else {
-		q = q.Order("ChapterNumber")
-	}
-
-	if qo.Project != nil {
-		q = q.Project(qo.Project...)
-	}
-
-	if qo.Limit > 0 {
-		q = q.Limit(qo.Limit)
-	}
-
-	var vs []PersistedVerse
-	_, err := q.GetAll(c, &vs)
+	biblexml, err := ioutil.ReadFile(pathToBibleXml)
 	if err != nil {
 		return nil, err
 	}
-
-	return vs, err
+	bible, err := UnmarshalBibleXml(biblexml)
+	if err != nil {
+		return nil, err
+	}
+	return bible, nil
 }
-*/
+
+func NewBibleCollection(c appengine.Context, pathToBibleXml string) (*BibleCollection, error) {
+	bc := new(BibleCollection)
+	bible, err := LoadXmlBible(c, pathToBibleXml)
+	if err != nil {
+		return bc, err
+	}
+	// add bible to bible collection
+	bc.Add(bible)
+	return bc, nil
+}

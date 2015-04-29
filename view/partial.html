@@ -1,0 +1,7 @@
+<div class="partial" data-bookId="{{.BookId}}" data-chapter="{{.ChapterNumber}}" data-maxChapter="{{.MaxChapterNumber}}" data-maxVerse="{{.MaxVerseNumber}}">
+	{{ range $key, $value := .Verses }}
+		<div class="partialVerse" data-verse="{{$value.Number}}">
+			<span>{{$value.Number}}</span> {{$value.Text}}
+		</div>
+	{{ end }}
+</div>

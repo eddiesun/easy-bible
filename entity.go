@@ -26,6 +26,17 @@ type AutocompleteContext struct {
 	Result *[]search.AutocompleteResult
 }
 
+type PartialContext struct {
+	BookId           int
+	BookLongName     string
+	BookShortName    string
+	BookOtherName    string
+	ChapterNumber    int
+	MaxChapterNumber int
+	Verses           []dataloader.Verse
+	MaxVerseNumber   int
+}
+
 func DefaultHeaderContext() HeaderContext {
 	return HeaderContext{Title: "Easy Bible Lookup"}
 }
