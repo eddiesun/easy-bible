@@ -1,6 +1,14 @@
-<div class="partial" data-bookId="{{.BookId}}" data-chapter="{{.ChapterNumber}}" data-maxChapter="{{.MaxChapterNumber}}" data-maxVerse="{{.MaxVerseNumber}}">
+<div
+	class="partial"
+	data-book-id="{{.BookId}}"
+	data-chapter="{{.ChapterNumber}}"
+	data-max-chapter="{{.MaxChapterNumber}}"
+	data-max-verse="{{.MaxVerseNumber}}"
+>
+	<h2>{{.BookLongName}} 第{{.ChapterNumber}}章</h2>
 	{{ range $key, $value := .Verses }}
 		<div class="partialVerse" data-verse="{{$value.Number}}">
+			<a name="{{$.BookId}}_{{$.ChapterNumber}}_{{$value.Number}}"></a>
 			<span>{{$value.Number}}</span> {{$value.Text}}
 		</div>
 	{{ end }}

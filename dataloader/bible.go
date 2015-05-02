@@ -86,6 +86,16 @@ func (bible *Bible) Book(bookId int) *Book {
 	return nil
 }
 
+func (bible *Bible) SafeBook(bookId int) *Book {
+	if bookId < 1 {
+		bookId = 1
+	}
+	if bookId > len(bible.Books) {
+		bookId = len(bible.Books)
+	}
+	return &bible.Books[bookId-1]
+}
+
 func (b *Book) Chapter(number int) *Chapter {
 	if number > len(b.Chapters) {
 		return nil
@@ -96,11 +106,31 @@ func (b *Book) Chapter(number int) *Chapter {
 	return &b.Chapters[number-1]
 }
 
+func (b *Book) SafeChapter(number int) *Chapter {
+	if number <= 0 {
+		number = 1
+	}
+	if number > len(b.Chapters) {
+		number = len(b.Chapters)
+	}
+	return &b.Chapters[number-1]
+}
+
 func (c *Chapter) GetVerses(from int, to int) []Verse {
 	if from > len(c.Verses) {
 		return nil
 	}
 	if from == 0 {
+		from = 1
+	}
+	if to == 0 || to > len(c.Verses) {
+		to = len(c.Verses)
+	}
+	return c.Verses[from-1 : to]
+}
+
+func (c *Chapter) SafeGetVerses(from int, to int) []Verse {
+	if from == 0 || from > len(c.Verses) {
 		from = 1
 	}
 	if to == 0 || to > len(c.Verses) {

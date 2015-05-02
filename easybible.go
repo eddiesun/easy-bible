@@ -21,25 +21,27 @@ func init() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	view := template.Must(template.ParseFiles("view/index.html", "view/header.html", "view/footer.html"))
-
-	// get bible object
 	// c := appengine.NewContext(r)
-
-	// q := datastore.NewQuery("Bible")
-	// var verses []dataloader.PersistedVerse
-	// if _, err := q.GetAll(c, &verses); err != nil {
-	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
-	// 	return
-	// }
 
 	ic := NewIndexContext()
 
+	if b := r.URL.Query().Get("b"); b != "" {
+		ic.InitBookId, _ = strconv.Atoi(b)
+	}
+	if c := r.URL.Query().Get("c"); c != "" {
+		ic.InitChapter, _ = strconv.Atoi(c)
+	}
+	if v1 := r.URL.Query().Get("v1"); v1 != "" {
+		ic.InitVerseBegin, _ = strconv.Atoi(v1)
+	}
+	if v2 := r.URL.Query().Get("v2"); v2 != "" {
+		ic.InitVerseEnd, _ = strconv.Atoi(v2)
+	}
+
+	view := template.Must(template.ParseFiles("view/index.html", "view/header.html", "view/footer.html"))
 	if err := view.Execute(w, ic); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
-
-	// fmt.Fprintf(w, "%+v", verses)
 }
 
 func partialHandler(w http.ResponseWriter, r *http.Request) {
@@ -55,28 +57,17 @@ func partialHandler(w http.ResponseWriter, r *http.Request) {
 
 	bc := getBibleCollection(c, w)
 	for _, bible := range bc.Bibles {
-		book := bible.Book(iBook)
-		if book == nil {
-			http.Error(w, "Invalid Book id "+strconv.Itoa(iBook), http.StatusBadRequest)
-		}
+		book := bible.SafeBook(iBook)
 		pc.BookId = book.Id
 		pc.BookLongName = book.LongName
 		pc.BookShortName = book.ShortName
 		pc.BookOtherName = book.OtherName
 
-		chapter := book.Chapter(iChapter)
-		if chapter == nil {
-			http.Error(w, "Invalid chapter number "+strconv.Itoa(iChapter), http.StatusBadRequest)
-		}
-
+		chapter := book.SafeChapter(iChapter)
 		pc.ChapterNumber = chapter.Number
 		pc.MaxChapterNumber = len(book.Chapters)
 
-		verses := chapter.GetVerses(iFromVerse, iToVerse)
-		if verses == nil {
-			http.Error(w, "Invalid verse number from "+strconv.Itoa(iFromVerse)+" to "+strconv.Itoa(iToVerse), http.StatusBadRequest)
-		}
-
+		verses := chapter.SafeGetVerses(iFromVerse, iToVerse)
 		pc.Verses = verses
 		pc.MaxVerseNumber = len(chapter.Verses)
 	}

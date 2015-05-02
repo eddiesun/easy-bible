@@ -18,8 +18,12 @@ type FooterContext struct {
 type IndexContext struct {
 	Header HeaderContext
 	Footer FooterContext
-	Bible  dataloader.Bible
-	Dump   interface{}
+	// Bible  dataloader.Bible
+	InitBookId     int
+	InitChapter    int
+	InitVerseBegin int
+	InitVerseEnd   int
+	Dump           interface{}
 }
 
 type AutocompleteContext struct {

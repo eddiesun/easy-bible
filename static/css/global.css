@@ -4,3 +4,10 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+.center {text-align: center;}
+
+.margin_t_20 {margin-top: 20px;}
+
+
+.bg_grey {background-color: #EDEDEB;}
