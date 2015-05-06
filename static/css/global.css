@@ -7,7 +7,20 @@
 
 .center {text-align: center;}
 
+.margin_t_2 {margin-top: 2px;}
+.margin_t_10 {margin-top: 10px;}
 .margin_t_20 {margin-top: 20px;}
-
+.margin_b_2 {margin-bottom: 2px;}
+.margin_t_10 {margin-top: 10px;}
+.margin_b_10 {margin-bottom: 10px;}
+.margin_t_5 {margin-top: 5px;}
+.margin_b_5 {margin-bottom: 5px;}
 
 .bg_grey {background-color: #EDEDEB;}
+
+.min_width_42 {min-width: 42px;}
+.width_100p {width: 100%;}
+
+.relative {position: relative;}
+
+.z1000 {z-index: 1000;}

@@ -16,9 +16,9 @@ type FooterContext struct {
 }
 
 type IndexContext struct {
-	Header HeaderContext
-	Footer FooterContext
-	// Bible  dataloader.Bible
+	Header         HeaderContext
+	Footer         FooterContext
+	Bible          *dataloader.Bible
 	InitBookId     int
 	InitChapter    int
 	InitVerseBegin int

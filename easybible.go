@@ -3,6 +3,7 @@ package easybible
 import (
 	_ "fmt"
 	"html/template"
+	"io/ioutil"
 	"net/http"
 	"strconv"
 
@@ -17,17 +18,22 @@ func init() {
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/autocomplete", autocompleteHandler)
 	http.HandleFunc("/partial", partialHandler)
+	http.HandleFunc("/bookmenu", bookmenuHandler)
 	// http.HandleFunc("/load", loadHandler)
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	// c := appengine.NewContext(r)
+	c := appengine.NewContext(r)
 
 	ic := NewIndexContext()
 
 	if b := r.URL.Query().Get("b"); b != "" {
 		ic.InitBookId, _ = strconv.Atoi(b)
 	}
+	if ic.InitBookId <= 0 {
+		ic.InitBookId = 1
+	}
+
 	if c := r.URL.Query().Get("c"); c != "" {
 		ic.InitChapter, _ = strconv.Atoi(c)
 	}
@@ -37,6 +43,9 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if v2 := r.URL.Query().Get("v2"); v2 != "" {
 		ic.InitVerseEnd, _ = strconv.Atoi(v2)
 	}
+
+	bc := getBibleCollection(c, w)
+	ic.Bible = bc.FirstBible()
 
 	view := template.Must(template.ParseFiles("view/index.html", "view/header.html", "view/footer.html"))
 	if err := view.Execute(w, ic); err != nil {
@@ -105,6 +114,46 @@ func autocompleteHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func bookmenuHandler(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	iBook, _ := strconv.Atoi(r.URL.Query().Get("b"))
+
+	// load bible object from memcache
+	bc := getBibleCollection(c, w)
+
+	bible := bc.FirstBible()
+	book := bible.SafeBook(iBook)
+
+	bmc := PartialContext{
+		BookId:           book.Id,
+		BookLongName:     book.LongName,
+		BookShortName:    book.ShortName,
+		BookOtherName:    book.OtherName,
+		ChapterNumber:    1,
+		MaxChapterNumber: len(book.Chapters),
+	}
+
+	funcMap := template.FuncMap{
+		"splitChapters": func(maxc int) []int {
+			is := make([]int, maxc)
+			for i := 0; i < maxc; i++ {
+				is[i] = i + 1
+			}
+			return is
+		},
+	}
+
+	// render view
+	file, _ := ioutil.ReadFile("view/bookmenu.html")
+	view, err := template.New("bookmenu").Funcs(funcMap).Parse(string(file))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	if err := view.Execute(w, bmc); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
 func getBibleCollection(c appengine.Context, w http.ResponseWriter) *dataloader.BibleCollection {
 	// load bible object from memcache
 	c.Infof("Try to load Bible collection from memcache\n")
@@ -131,35 +180,3 @@ func getBibleCollection(c appengine.Context, w http.ResponseWriter) *dataloader.
 	}
 	return bc
 }
-
-/*
-func loadHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("Content-Type", "text/plain; charset=utf-8")
-	c := appengine.NewContext(r)
-	bc := new(dataloader.BibleCollection)
-
-	biblexml, err := ioutil.ReadFile("data/bible_processed.xml")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-
-	bible, err := dataloader.UnmarshalBibleXml(biblexml)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-
-	// add bible to bible collection
-	bc.Add(bible)
-
-	// store the processed bible
-	if err := bc.Persist(c, w); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	// fmt.Fprintf(w, "%s", bible.ToJson())
-
-	// fmt.Fprintf(w, "%s", biblexml)
-
-	fmt.Fprintf(w, "ok")
-}
-*/

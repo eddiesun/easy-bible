@@ -146,6 +146,13 @@ func (bc *BibleCollection) Add(b *Bible) {
 	bc.Bibles[b.Version] = b
 }
 
+func (bc *BibleCollection) FirstBible() *Bible {
+	for _, v := range bc.Bibles {
+		return v
+	}
+	return nil
+}
+
 func LoadXmlBible(c appengine.Context, pathToBibleXml string) (*Bible, error) {
 	timeStart := time.Now()
 	defer c.Infof("    Loading xml bible took %s \n", time.Since(timeStart))

@@ -1,0 +1,7 @@
+<div class="chapterButtonGroup">
+{{ range $chapter := splitChapters .MaxChapterNumber }}
+	<button type="button" class="min_width_42 btn margin_t_2 margin_b_2 btn-default" data-chapter="{{$chapter}}" onclick="window.location.href='?b={{$.BookId}}&amp;c={{$chapter}}';">
+		{{ $chapter }}
+	</button>
+{{ end }}
+</div>

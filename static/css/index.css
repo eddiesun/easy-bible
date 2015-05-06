@@ -16,10 +16,34 @@ button.menu .icon-bar {
 	background-color: #888;
 	margin-top: 4px;
 }
-button.menu:hover {
+button.menu:hover,
+button.menu.active {
 	background-color: #337ab7;
 	border-color: #2e6da4;
 }
-button.menu:hover .icon-bar {
+button.menu:hover .icon-bar,
+button.menu.active .icon-bar
+{
 	background-color: #FFF;
+}
+
+#menuContainer {
+	padding-top: 2px;
+}
+
+#autocomplete {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-top: transparent;
+	border-left: 1px solid #66AFE9;
+	border-right: 1px solid #66AFE9;
+	border-bottom: 1px solid #66AFE9;
+	-webkit-box-shadow: 0px 10px 20px 0px rgba(150,150,150,0.75);
+	-moz-box-shadow: 0px 10px 20px 0px rgba(150,150,150,0.75);
+	box-shadow: 0px 10px 20px 0px rgba(150,150,150,0.75);
+	padding: 5px;
+	background-color: white;
+	position: absolute;
+	left: 15px;
+	right: 15px;
 }

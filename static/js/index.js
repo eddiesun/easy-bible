@@ -1,15 +1,14 @@
 /**
- * Page load
+ * Autocomplete
  */
 $(function() {
 	$('#searchButton').click(autocomplete);
 	$('#searchInput').keyup(autocomplete);
-	initPartial();
+	$('#searchInput').blur(function() {
+		$('#autocomplete').hide();
+	});
 });
 
-/**
- * Autocomplete
- */
 var pendingAutocomplete
 function autocomplete(event) {
 	event.preventDefault();
@@ -26,11 +25,12 @@ function autocomplete(event) {
 			url: "/autocomplete",
 			data: {query: q},
 			success: function(responseBody) {
-				$("#autocomplete").html(responseBody)
+				$("#autocomplete").html(responseBody);
+				$("#autocomplete").show();
 			}
 		});
 	} else {
-		$("#autocomplete").html("")
+		$("#autocomplete").html("");
 	}
 }
 
@@ -38,6 +38,10 @@ function autocomplete(event) {
 /**
  * Partial verses loading
  */
+$(function() {
+	initPartial();
+	$(window).resize(checkLoadingPartial);
+});
 var partialParams = {
 	b: 0,
 	c: 0,
@@ -53,29 +57,26 @@ function initPartial() {
 	partialParams.v1 = $('#partialContainer').data('init-verse-begin');
 	partialParams.v2 = $('#partialContainer').data('init-verse-end');
 
+	checkLoadingPartial();
+	$(window).scroll(function(){
+		checkLoadingPartial();
+	});
+}
+
+function checkLoadingPartial() {
 	if (isLoadingMarkerInViewport()) {
 		loadPartial();
 	}
-
-	$(window).scroll(function(){
-		if (isLoadingMarkerInViewport()) {
-			loadPartial();
-		}
-	});
 }
 
 function loadPartial() {
 	if (pendingPartial != null) {
-		// console.log("loadPartial - nothing");
 		return;
 	}
 
 	if (calculateNextPartialParam()) {
-		console.log("loadPartial - No more partial");
 		return;
 	}
-
-	console.log("loadPartial - !!");
 
 	pendingPartial = $.ajax({
 		type: "GET",
@@ -83,10 +84,9 @@ function loadPartial() {
 		data: partialParams,
 		success: function(responseBody) {
 			$("#partialContainer").append(responseBody);
+			checkVerseFont();
 			pendingPartial = null;
-			if (isLoadingMarkerInViewport()) {
-				loadPartial();
-			}
+			checkLoadingPartial();
 		}
 	});
 }
@@ -101,14 +101,12 @@ function calculateNextPartialParam() {
 			noMorePartial = false;
 			partialParams.c = lastPartial.data('chapter') + 1;
 		}
-		console.log("next partial param", partialParams);
 	}
 	return noMorePartial;
 }
 
 function isLoadingMarkerInViewport() {
 	var box = $('#loadingMarker')[0].getBoundingClientRect();
-	// console.log("In viewport? ", box.bottom - box.height < $(window).height());
 	return box.bottom - box.height < $(window).height();
 }
 
@@ -120,7 +118,6 @@ function isLoadingMarkerInViewport() {
 var menuAnimating = false;
 $(function() {
 	$("button.menu").click(function() {
-		console.log($(this), event);
 		if (!menuAnimating) {
 			if (!$('#menuContainer').is(':visible')) {
 				menuAnimating = true;
@@ -131,6 +128,7 @@ $(function() {
 						menuAnimating = false;
 					}
 				});
+				$("button.menu").addClass('active');
 			} else {
 				if ($('#menuContainer').is(':visible')) {
 					menuAnimating = true;
@@ -142,9 +140,98 @@ $(function() {
 						}
 					});
 				}
+				$("button.menu").removeClass('active');
 			}
 		}
 	});
 })
-// function toggleMenu(event) {
-// }
+
+/**
+ * Menu button
+ */
+$(function() {
+	$('button.bookmenu').click(function() {
+		// hide chapter menu if any are already visible
+		$("#chapterBlock").hide();
+
+		// hide book menu
+		$('#bookBlock').hide();
+		// show selected book menu
+		displaySelectedBookMenu($(this).data('book-id'), $(this).html());
+
+		// load chapter menu via Ajax. when done slide down chapter menu
+		loadChapterButtons($(this).data('book-id'), function() {
+			$("#chapterBlock").slideDown({
+				duration: 300
+			});
+		});
+
+		// scroll to top book menu if screen is too low
+		scrollToBookMenu();
+
+	});
+
+	$('#unselectBookMenu').click(function() {
+		$('#unselectBookMenu').hide();
+		$('#selectedBookMenu').hide();
+		$("#chapterBlock").hide();
+		$('#bookBlock').slideDown(500);
+	});
+});
+
+function loadChapterButtons(bookId, callback) {
+	$.ajax({
+		type: "GET",
+		url: "/bookmenu",
+		data: {b: bookId},
+		success: function(responseBody) {
+			$("#chapterBlock").html(responseBody);
+			callback();
+		}
+	});
+}
+
+function displaySelectedBookMenu(bookId, bookName) {
+	$('#unselectBookMenu').show();
+	$('#selectedBookMenu').show();
+	$('#selectedBookMenu').data('book-id', bookId).html(bookName);
+}
+
+function scrollToBookMenu() {
+	var box = $('#menuContainer')[0].getBoundingClientRect();
+	// if menu container is out of the screen, scroll to its back
+	if (box.top < 0) {
+		var body = $("html, body");
+		body.animate({scrollTop:0}, '500', 'swing');
+	}
+
+}
+
+/**
+ * Hot keys
+ */
+var verseFontSize = 14;
+$(function() {
+	$(document).keypress(function(event) {
+		if (event.which == 61) { // + key was pressed. increase verse font
+			incVerseFont();
+		}
+		if (event.which == 45) { // - key was pressed. decrease verse font
+			decVerseFont();
+		}
+	});
+});
+function incVerseFont() {
+	verseFontSize++;
+	checkVerseFont();
+}
+function decVerseFont() {
+	verseFontSize--;
+	checkVerseFont();
+
+	// if loading box appears due to decreasing font
+	checkLoadingPartial();
+}
+function checkVerseFont() {
+	$('.partialVerse').css('font-size', verseFontSize+'px');
+}
