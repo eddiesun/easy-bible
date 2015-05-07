@@ -13,6 +13,7 @@ type ()
 
 var bibleVersions = []string{"和合本"}
 var numOfBooksInBible = 66
+var liteBooksKey = "Lite Books"
 
 func getMemcacheKey(version string, bookId int) string {
 	return "bible-" + version + "-Book-" + strconv.Itoa(bookId)
@@ -21,6 +22,7 @@ func getMemcacheKey(version string, bookId int) string {
 func MemcachePut(c appengine.Context, bc *BibleCollection) error {
 	defer util.LogTime(c, time.Now(), "    Saving Bible Collection to memcache: ")
 
+	// prepare storing all books
 	var memcacheItemList []*memcache.Item
 	for _, bible := range bc.Bibles {
 		for _, book := range bible.Books {
@@ -34,7 +36,18 @@ func MemcachePut(c appengine.Context, bc *BibleCollection) error {
 			})
 		}
 	}
-	err := memcache.SetMulti(c, memcacheItemList)
+	// prepare storing lite books
+	liteBooksJson, err := json.Marshal(bc.LiteBooks)
+	if err != nil {
+		return err
+	}
+	memcacheItemList = append(memcacheItemList, &memcache.Item{
+		Key:   liteBooksKey,
+		Value: liteBooksJson,
+	})
+
+	// actual call to mamcache store
+	err = memcache.SetMulti(c, memcacheItemList)
 	if err != nil {
 		return err
 	}
@@ -44,17 +57,24 @@ func MemcachePut(c appengine.Context, bc *BibleCollection) error {
 func MemcacheGet(c appengine.Context) (*BibleCollection, error) {
 	defer util.LogTime(c, time.Now(), "    Getting bible collection from memcache ")
 
+	// prepare all books
 	var memcacheKeyList []string
 	for _, version := range bibleVersions {
 		for bookId := 1; bookId <= numOfBooksInBible; bookId++ {
 			memcacheKeyList = append(memcacheKeyList, getMemcacheKey(version, bookId))
 		}
 	}
+
+	// prepare lite books
+	memcacheKeyList = append(memcacheKeyList, liteBooksKey)
+
+	// fetching json data from memcache
 	keyBookMap, err := memcache.GetMulti(c, memcacheKeyList)
 	if err != nil || keyBookMap == nil || len(keyBookMap) <= 0 {
 		return nil, err
 	}
 
+	// convert json into object for chapters and verses
 	bc := new(BibleCollection)
 	bc.Bibles = make(map[string]*Bible)
 	for _, version := range bibleVersions {
@@ -77,6 +97,16 @@ func MemcacheGet(c appengine.Context) (*BibleCollection, error) {
 		bc.Bibles[version] = &bible
 	}
 
+	// convert book name id map json to object
+	if _, exist := keyBookMap[liteBooksKey]; !exist {
+		c.Debugf("    NOT IN CACHE, key: %+v\n", liteBooksKey)
+		return nil, err
+	}
+	err = json.Unmarshal(keyBookMap[liteBooksKey].Value, &bc.LiteBooks)
+	if err != nil {
+		return bc, nil
+	}
+
 	return bc, nil
 }
 
@@ -97,4 +127,22 @@ func MemcacheGetBook(c appengine.Context, version string, bookId int) (*Book, er
 	}
 
 	return &book, err
+}
+
+func MemcacheGetLiteBooks(c appengine.Context) ([]LiteBook, error) {
+	defer util.LogTime(c, time.Now(), "    Getting LiteBooks from memcache ")
+	item, err := memcache.Get(c, liteBooksKey)
+	if err == memcache.ErrCacheMiss {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	var liteBooks []LiteBook
+	if err := json.Unmarshal(item.Value, &liteBooks); err != nil {
+		return nil, err
+	}
+
+	return liteBooks, nil
 }

@@ -12,7 +12,8 @@ import (
 
 type (
 	BibleCollection struct {
-		Bibles map[string]*Bible
+		Bibles    map[string]*Bible
+		LiteBooks []LiteBook
 	}
 
 	Bible struct {
@@ -40,6 +41,13 @@ type (
 		ShortName    string
 		LongName     string
 		OtherName    string
+	}
+	LiteBook struct {
+		Id          int
+		ShortName   string
+		LongName    string
+		OtherName   string
+		NumChapters int
 	}
 
 	Chapter struct {
@@ -117,6 +125,16 @@ func (b *Book) SafeChapter(number int) *Chapter {
 	return &b.Chapters[number-1]
 }
 
+func NewLiteBook(b *Book) *LiteBook {
+	lb := new(LiteBook)
+	lb.Id = b.Id
+	lb.ShortName = b.ShortName
+	lb.LongName = b.LongName
+	lb.OtherName = b.OtherName
+	lb.NumChapters = len(b.Chapters)
+	return lb
+}
+
 func (c *Chapter) GetVerses(from int, to int) []Verse {
 	if from > len(c.Verses) {
 		return nil
@@ -154,6 +172,15 @@ func (bc *BibleCollection) FirstBible() *Bible {
 	return nil
 }
 
+func (bc *BibleCollection) AddLiteBooks(b *Bible) {
+	bc.LiteBooks = make([]LiteBook, len(b.Books))
+	var i = 0
+	for _, book := range b.Books {
+		bc.LiteBooks[i] = *(NewLiteBook(&book))
+		i++
+	}
+}
+
 func LoadXmlBible(c appengine.Context, pathToBibleXml string) (*Bible, error) {
 	defer util.LogTime(c, time.Now(), "    Loading xml bible took ")
 
@@ -176,5 +203,6 @@ func NewBibleCollection(c appengine.Context, pathToBibleXml string) (*BibleColle
 	}
 	// add bible to bible collection
 	bc.Add(bible)
+	bc.AddLiteBooks(bible)
 	return bc, nil
 }

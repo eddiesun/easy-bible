@@ -27,7 +27,7 @@
 				</button>
 				<button type="button" id="selectedBookMenu" style="display:none;" data-book-id="" class="margin_b_5 margin_t_5 btn btn-primary"></button>
 				<div id="bookBlock">
-					{{ range $book := .Bible.Books }}
+					{{ range $book := .LiteBooks }}
 						{{ if eq $book.Id 40 }}
 							<hr class="margin_t_5 margin_b_5" />
 						{{ end }}

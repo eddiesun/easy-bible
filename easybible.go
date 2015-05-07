@@ -47,8 +47,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		ic.InitVerseEnd, _ = strconv.Atoi(v2)
 	}
 
-	bc := getBibleCollection(c, w)
-	ic.Bible = bc.FirstBible()
+	ic.LiteBooks = getLiteBooks(c, w)
 
 	view := template.Must(template.ParseFiles("view/index.html", "view/header.html", "view/footer.html"))
 	if err := view.Execute(w, ic); err != nil {
@@ -68,24 +67,8 @@ func partialHandler(w http.ResponseWriter, r *http.Request) {
 
 	pc := PartialContext{}
 
-	// bc := getBibleCollection(c, w)
-	// for _, bible := range bc.Bibles {
-	// 	book := bible.SafeBook(iBook)
-	// 	pc.BookId = book.Id
-	// 	pc.BookLongName = book.LongName
-	// 	pc.BookShortName = book.ShortName
-	// 	pc.BookOtherName = book.OtherName
+	book := getBook(c, w, "和合本", iBook) // get from memcache
 
-	// 	chapter := book.SafeChapter(iChapter)
-	// 	pc.ChapterNumber = chapter.Number
-	// 	pc.MaxChapterNumber = len(book.Chapters)
-
-	// 	verses := chapter.SafeGetVerses(iFromVerse, iToVerse)
-	// 	pc.Verses = verses
-	// 	pc.MaxVerseNumber = len(chapter.Verses)
-	// }
-
-	book := getBook(c, w, "和合本", iBook)
 	pc.BookId = book.Id
 	pc.BookLongName = book.LongName
 	pc.BookShortName = book.ShortName
@@ -199,6 +182,9 @@ func getBibleCollection(c appengine.Context, w http.ResponseWriter) *dataloader.
 	} else {
 		c.Infof("Memcache HIT for Bible collection\n")
 	}
+
+	// c.Debugf("!!!! map=%+v\n", bc.BookOtherNameIdMap)
+
 	return bc
 }
 
@@ -218,4 +204,19 @@ func getBook(c appengine.Context, w http.ResponseWriter, version string, bookId 
 	}
 
 	return book
+}
+
+func getLiteBooks(c appengine.Context, w http.ResponseWriter) []dataloader.LiteBook {
+	c.Infof("Try to get LiteBooks from memcache or call getBibleCollection\n")
+	defer util.LogTime(c, time.Now(), "Getting LiteBooks took ")
+
+	liteBooks, err := dataloader.MemcacheGetLiteBooks(c)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	if liteBooks == nil {
+		return getBibleCollection(c, w).LiteBooks
+	}
+	return liteBooks
 }
