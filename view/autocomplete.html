@@ -1,6 +1,6 @@
 <div class="autocompleteContainer">
 	{{ range $key, $value := .Result }}
-		<div class="autocompleteRow"
+		<a class="autocompleteRow"
 			data-version="{{ $value.BibleVersion }}"
 			data-bookId="{{ $value.BookId }}"
 			data-BookShortName="{{ $value.BookShortName }}"
@@ -9,24 +9,25 @@
 			data-ChapterNumber="{{ $value.ChapterNumber }}"
 			data-VerseFrom="{{ $value.VerseFrom }}"
 			data-VerseTo="{{ $value.VerseTo }}"
+			href="?b={{$value.BookId}}&amp;c={{$value.ChapterNumber}}&amp;v1={{$value.VerseFrom}}&amp;v2={{$value.VerseTo}}"
 		>
-			<div>
-				<span>{{ $value.BookLongName }}</span>
-				<span>{{ $value.ChapterNumber }}</span><span>章</span>
+			<div class="grey">
+				<span class="black">{{ $value.BookLongName }}</span>
+				<span class="black">{{ $value.ChapterNumber }}</span><span>章</span>
 				
 				{{ if and (eq $value.VerseFrom 0) (eq $value.VerseTo 0)}}
 					<span></span>
 				{{ else if eq $value.VerseFrom $value.VerseTo}}
-					<span>{{$value.VerseFrom}}</span><span>節</span>
+					<span class="black">{{$value.VerseFrom}}</span><span>節</span>
 				{{ else }}
-					<span>{{$value.VerseFrom}}</span><span>節</span> &mdash; <span>{{$value.VerseTo}}</span><span>節</span>
+					<span class="black">{{$value.VerseFrom}}</span><span>節</span> <span class="black">&mdash;</span> <span class="black">{{$value.VerseTo}}</span><span>節</span>
 				{{ end }}
 			</div>
-			<div class="ellipsis">
+			<div class="grey ellipsis">
 				{{ range $value.VerseText }}
 					<span>{{.Number}}</span> <span>{{.Text}}</span>
 				{{end}}
 			</div>
-		</div>
+		</a>
 	{{end}}
 </div>

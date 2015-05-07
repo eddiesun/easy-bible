@@ -1,3 +1,9 @@
+#siteWrapper {
+	position: relative;
+	min-height: 100%;
+	padding-bottom: 300px; /* height of footer */
+}
+
 button.menu {
 	position: relative;
 	float: left;
@@ -22,8 +28,7 @@ button.menu.active {
 	border-color: #2e6da4;
 }
 button.menu:hover .icon-bar,
-button.menu.active .icon-bar
-{
+button.menu.active .icon-bar {
 	background-color: #FFF;
 }
 
@@ -41,9 +46,44 @@ button.menu.active .icon-bar
 	-webkit-box-shadow: 0px 10px 20px 0px rgba(150,150,150,0.75);
 	-moz-box-shadow: 0px 10px 20px 0px rgba(150,150,150,0.75);
 	box-shadow: 0px 10px 20px 0px rgba(150,150,150,0.75);
-	padding: 5px;
 	background-color: white;
 	position: absolute;
 	left: 15px;
 	right: 15px;
+}
+
+.autocompleteRow {
+	display: block;
+	text-decoration: none;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+.autocompleteRow:hover {
+	color: white;
+	text-decoration: inherit;
+	background-color: #03A9F4;
+}
+.autocompleteRow:hover .grey,
+.autocompleteRow:hover .black {
+	color: white;
+}
+
+#siteFooter {
+	background-color: #EDEDED;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+}
+.footerProfile {
+	width: 80px;
+	position: relative;
+	float: left;
+	margin-left: 10px;
+	margin-right: 20px;
+	top: -20px;
+	z-index: 10;
+}
+
+#donateBtn {
+
 }

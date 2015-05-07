@@ -5,7 +5,9 @@ $(function() {
 	$('#searchButton').click(autocomplete);
 	$('#searchInput').keyup(autocomplete);
 	$('#searchInput').blur(function() {
-		$('#autocomplete').hide();
+		if (!$('#autocomplete').is(":hover")) {
+			$('#autocomplete').hide();
+		}
 	});
 });
 
@@ -30,6 +32,7 @@ function autocomplete(event) {
 			}
 		});
 	} else {
+		$("#autocomplete").hide();
 		$("#autocomplete").html("");
 	}
 }
@@ -57,7 +60,7 @@ function initPartial() {
 	partialParams.v1 = $('#partialContainer').data('init-verse-begin');
 	partialParams.v2 = $('#partialContainer').data('init-verse-end');
 
-	checkLoadingPartial();
+	loadPartial(true);
 	$(window).scroll(function(){
 		checkLoadingPartial();
 	});
@@ -69,12 +72,24 @@ function checkLoadingPartial() {
 	}
 }
 
-function loadPartial() {
+function isAutoPartialLoadingEnabled() {
+	if (partialParams.v1 <= 0) {
+		return true;
+	}
+	return false;
+}
+
+function loadPartial(firstLoad) {
 	if (pendingPartial != null) {
 		return;
 	}
 
 	if (calculateNextPartialParam()) {
+		return;
+	}
+
+	if (!isAutoPartialLoadingEnabled() && !firstLoad) {
+		$('#loadingMarker').hide();
 		return;
 	}
 
