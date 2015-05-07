@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"strconv"
 	"time"
+	"util"
 )
 
 type ()
@@ -18,8 +19,7 @@ func getMemcacheKey(version string, bookId int) string {
 }
 
 func MemcachePut(c appengine.Context, bc *BibleCollection) error {
-	timeStart := time.Now()
-	defer c.Infof("    Saving Bible Collection to memcache: %s \n", time.Since(timeStart))
+	defer util.LogTime(c, time.Now(), "    Saving Bible Collection to memcache: ")
 
 	var memcacheItemList []*memcache.Item
 	for _, bible := range bc.Bibles {
@@ -42,8 +42,7 @@ func MemcachePut(c appengine.Context, bc *BibleCollection) error {
 }
 
 func MemcacheGet(c appengine.Context) (*BibleCollection, error) {
-	timeStart := time.Now()
-	defer c.Infof("    Getting bible collection from memcache %s \n", time.Since(timeStart))
+	defer util.LogTime(c, time.Now(), "    Getting bible collection from memcache ")
 
 	var memcacheKeyList []string
 	for _, version := range bibleVersions {
@@ -63,15 +62,39 @@ func MemcacheGet(c appengine.Context) (*BibleCollection, error) {
 		for bookId := 1; bookId <= numOfBooksInBible; bookId++ {
 			key := getMemcacheKey(version, bookId)
 			var book Book
+			// c.Debugf("*** key: %+v\n *** keyBookMap[key]%+v\n", key, keyBookMap[key])
+			if _, exist := keyBookMap[key]; !exist {
+				// some books are not in memcache. Consider the whole book is not in cache, For Now!
+				c.Debugf("***!!!!!!!*** NOT IN CACHE, key: %+v\n", key)
+				return nil, err
+			}
 			err := json.Unmarshal(keyBookMap[key].Value, &book)
 			if err != nil {
 				return nil, err
 			}
-			// c.Debugf("*** %+v\n%+v\n%+v\n", bc, version, book)
 			bible.Books = append(bible.Books, book)
 		}
 		bc.Bibles[version] = &bible
 	}
 
 	return bc, nil
+}
+
+func MemcacheGetBook(c appengine.Context, version string, bookId int) (*Book, error) {
+	defer util.LogTime(c, time.Now(), "    Getting one Book from memcache ")
+
+	item, err := memcache.Get(c, getMemcacheKey(version, bookId))
+	if err == memcache.ErrCacheMiss {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	var book Book
+	if err := json.Unmarshal(item.Value, &book); err != nil {
+		return nil, err
+	}
+
+	return &book, err
 }

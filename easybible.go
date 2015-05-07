@@ -6,12 +6,13 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
+	"time"
 
 	"appengine"
-	_ "appengine/memcache"
 
 	"dataloader"
 	"search"
+	"util"
 )
 
 func init() {
@@ -24,6 +25,8 @@ func init() {
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
+	c.Infof("\n\n\n***** New Index Request *****\n")
+	defer util.LogTime(c, time.Now(), "***** Index Request Served in ")
 
 	ic := NewIndexContext()
 
@@ -56,6 +59,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 func partialHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	c.Infof("\n\n\n***** New Partial Request *****\n")
+	defer util.LogTime(c, time.Now(), "***** Partial Request Served in ")
 
 	iBook, _ := strconv.Atoi(r.URL.Query().Get("b"))
 	iChapter, _ := strconv.Atoi(r.URL.Query().Get("c"))
@@ -64,22 +68,36 @@ func partialHandler(w http.ResponseWriter, r *http.Request) {
 
 	pc := PartialContext{}
 
-	bc := getBibleCollection(c, w)
-	for _, bible := range bc.Bibles {
-		book := bible.SafeBook(iBook)
-		pc.BookId = book.Id
-		pc.BookLongName = book.LongName
-		pc.BookShortName = book.ShortName
-		pc.BookOtherName = book.OtherName
+	// bc := getBibleCollection(c, w)
+	// for _, bible := range bc.Bibles {
+	// 	book := bible.SafeBook(iBook)
+	// 	pc.BookId = book.Id
+	// 	pc.BookLongName = book.LongName
+	// 	pc.BookShortName = book.ShortName
+	// 	pc.BookOtherName = book.OtherName
 
-		chapter := book.SafeChapter(iChapter)
-		pc.ChapterNumber = chapter.Number
-		pc.MaxChapterNumber = len(book.Chapters)
+	// 	chapter := book.SafeChapter(iChapter)
+	// 	pc.ChapterNumber = chapter.Number
+	// 	pc.MaxChapterNumber = len(book.Chapters)
 
-		verses := chapter.SafeGetVerses(iFromVerse, iToVerse)
-		pc.Verses = verses
-		pc.MaxVerseNumber = len(chapter.Verses)
-	}
+	// 	verses := chapter.SafeGetVerses(iFromVerse, iToVerse)
+	// 	pc.Verses = verses
+	// 	pc.MaxVerseNumber = len(chapter.Verses)
+	// }
+
+	book := getBook(c, w, "和合本", iBook)
+	pc.BookId = book.Id
+	pc.BookLongName = book.LongName
+	pc.BookShortName = book.ShortName
+	pc.BookOtherName = book.OtherName
+
+	chapter := book.SafeChapter(iChapter)
+	pc.ChapterNumber = chapter.Number
+	pc.MaxChapterNumber = len(book.Chapters)
+
+	verses := chapter.SafeGetVerses(iFromVerse, iToVerse)
+	pc.Verses = verses
+	pc.MaxVerseNumber = len(chapter.Verses)
 
 	// render view
 	view := template.Must(template.ParseFiles("view/partial.html"))
@@ -91,6 +109,7 @@ func partialHandler(w http.ResponseWriter, r *http.Request) {
 func autocompleteHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	c.Infof("\n\n\n***** New Autocomplete Request *****\n")
+	defer util.LogTime(c, time.Now(), "***** Autocomplete Request Served in ")
 
 	userQuery := r.URL.Query().Get("query")
 	if userQuery == "" {
@@ -116,13 +135,13 @@ func autocompleteHandler(w http.ResponseWriter, r *http.Request) {
 
 func bookmenuHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
+	c.Infof("\n\n\n***** New Bookmenu Request *****\n")
+	defer util.LogTime(c, time.Now(), "***** Bookmenu Request Served in ")
+
 	iBook, _ := strconv.Atoi(r.URL.Query().Get("b"))
 
 	// load bible object from memcache
-	bc := getBibleCollection(c, w)
-
-	bible := bc.FirstBible()
-	book := bible.SafeBook(iBook)
+	book := getBook(c, w, "和合本", iBook)
 
 	bmc := PartialContext{
 		BookId:           book.Id,
@@ -156,7 +175,9 @@ func bookmenuHandler(w http.ResponseWriter, r *http.Request) {
 
 func getBibleCollection(c appengine.Context, w http.ResponseWriter) *dataloader.BibleCollection {
 	// load bible object from memcache
-	c.Infof("Try to load Bible collection from memcache\n")
+	c.Infof("Try to load Bible collection from memcache or from xml\n")
+	defer util.LogTime(c, time.Now(), "Getting Bible collection took ")
+
 	bc, err := dataloader.MemcacheGet(c)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -179,4 +200,22 @@ func getBibleCollection(c appengine.Context, w http.ResponseWriter) *dataloader.
 		c.Infof("Memcache HIT for Bible collection\n")
 	}
 	return bc
+}
+
+func getBook(c appengine.Context, w http.ResponseWriter, version string, bookId int) *dataloader.Book {
+	c.Infof("Try to get a Book from memcache or call getBibleCollection\n")
+	defer util.LogTime(c, time.Now(), "Getting a Book took ")
+
+	book, err := dataloader.MemcacheGetBook(c, version, bookId)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	// if cache miss
+	if book == nil {
+		bc := getBibleCollection(c, w)
+		return bc.Bibles[version].SafeBook(bookId)
+	}
+
+	return book
 }

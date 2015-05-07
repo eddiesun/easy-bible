@@ -225,7 +225,7 @@ function scrollToBookMenu() {
 /**
  * Hot keys
  */
-var verseFontSize = 14;
+var verseFontSize = 16;
 $(function() {
 	$(document).keypress(function(event) {
 		if (event.which == 61) { // + key was pressed. increase verse font

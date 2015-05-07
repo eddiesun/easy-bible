@@ -2,12 +2,12 @@ package search
 
 import (
 	"appengine"
-	_ "appengine/datastore"
 	"dataloader"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+	"util"
 )
 
 const (
@@ -43,11 +43,11 @@ type (
 )
 
 func NewSearch(c appengine.Context, userInput string, bc *dataloader.BibleCollection) (*Search, error) {
-	timeStart := time.Now()
-	defer c.Infof("Querying took %s\n", time.Since(timeStart))
+	defer util.LogTime(c, time.Now(), "Querying took ")
 
 	s := new(Search)
 	s.userInput = strings.Replace(userInput, " ", "", -1)
+	s.userInput = strings.ToLower(s.userInput)
 
 	c.Debugf("    Input string: %s\n", s.userInput)
 

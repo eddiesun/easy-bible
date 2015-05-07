@@ -7,6 +7,7 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 	"time"
+	"util"
 )
 
 type (
@@ -154,8 +155,7 @@ func (bc *BibleCollection) FirstBible() *Bible {
 }
 
 func LoadXmlBible(c appengine.Context, pathToBibleXml string) (*Bible, error) {
-	timeStart := time.Now()
-	defer c.Infof("    Loading xml bible took %s \n", time.Since(timeStart))
+	defer util.LogTime(c, time.Now(), "    Loading xml bible took ")
 
 	biblexml, err := ioutil.ReadFile(pathToBibleXml)
 	if err != nil {
