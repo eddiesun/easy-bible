@@ -251,5 +251,5 @@ function decVerseFont() {
 	checkLoadingPartial();
 }
 function checkVerseFont() {
-	$('.partialVerse').css('font-size', verseFontSize+'px');
+	$('.partialTable').css('font-size', verseFontSize+'px');
 }

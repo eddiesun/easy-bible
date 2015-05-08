@@ -98,3 +98,8 @@ button.menu.active .icon-bar {
 	width: 32px;
 	margin: 5px auto;
 }
+
+.partialTable td {
+	vertical-align: top;
+	padding-right: 5px;
+}
