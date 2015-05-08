@@ -1,33 +1,36 @@
 <div class="autocompleteContainer">
-	{{ range $key, $value := .Result }}
-		<a class="autocompleteRow"
-			data-version="{{ $value.BibleVersion }}"
-			data-bookId="{{ $value.BookId }}"
-			data-BookShortName="{{ $value.BookShortName }}"
-			data-BookLongName="{{ $value.BookLongName }}"
-			data-BookOtherName="{{ $value.BookOtherName }}"
-			data-ChapterNumber="{{ $value.ChapterNumber }}"
-			data-VerseFrom="{{ $value.VerseFrom }}"
-			data-VerseTo="{{ $value.VerseTo }}"
-			href="?b={{$value.BookId}}&amp;c={{$value.ChapterNumber}}&amp;v1={{$value.VerseFrom}}&amp;v2={{$value.VerseTo}}"
-		>
-			<div class="grey">
-				<span class="black">{{ $value.BookLongName }}</span>
-				<span class="black">{{ $value.ChapterNumber }}</span><span>章</span>
-				
-				{{ if and (eq $value.VerseFrom 0) (eq $value.VerseTo 0)}}
-					<span></span>
-				{{ else if eq $value.VerseFrom $value.VerseTo}}
-					<span class="black">{{$value.VerseFrom}}</span><span>節</span>
-				{{ else }}
-					<span class="black">{{$value.VerseFrom}}</span><span>節</span> <span class="black">&mdash;</span> <span class="black">{{$value.VerseTo}}</span><span>節</span>
-				{{ end }}
-			</div>
-			<div class="grey ellipsis">
-				{{ range $value.VerseText }}
-					<span>{{.Number}}</span> <span>{{.Text}}</span>
-				{{end}}
-			</div>
-		</a>
-	{{end}}
+	{{ with gt (len .Result) 0 }}
+		{{ range $key, $value := $.Result }}
+			<a class="autocompleteRow"
+				data-version="{{ $value.BibleVersion }}"
+				data-bookId="{{ $value.BookId }}"
+				data-BookShortName="{{ $value.BookShortName }}"
+				data-BookLongName="{{ $value.BookLongName }}"
+				data-BookOtherName="{{ $value.BookOtherName }}"
+				data-ChapterNumber="{{ $value.ChapterNumber }}"
+				data-VerseFrom="{{ $value.VerseFrom }}"
+				data-VerseTo="{{ $value.VerseTo }}"
+				href="?b={{$value.BookId}}&amp;c={{$value.ChapterNumber}}&amp;v1={{$value.VerseFrom}}&amp;v2={{$value.VerseTo}}"
+			>
+				<div class="black font16">
+					{{ $value.BookLongName }} {{ $value.ChapterNumber }}章
+					
+					{{ if and (eq $value.VerseFrom 0) (eq $value.VerseTo 0)}}
+						
+					{{ else if eq $value.VerseFrom $value.VerseTo}}
+						{{$value.VerseFrom}}節
+					{{ else }}
+						{{$value.VerseFrom}}節 &mdash; {{$value.VerseTo}}節
+					{{ end }}
+				</div>
+				<div class="grey ellipsis">
+					{{ range $value.VerseText }}
+						{{.Number}} {{.Text}}
+					{{end}}
+				</div>
+			</a>
+		{{ end }}
+	{{ else }}
+		<div id="autocompleteNoResults">沒找到相關經文... No Results Found...</div>
+	{{ end }}
 </div>

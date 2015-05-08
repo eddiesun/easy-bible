@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	AUTOCOMPLETE_MAX_NUM_BOOKS = 5
+	AUTOCOMPLETE_MAX_NUM_BOOKS = 8
 )
 
 type (
@@ -42,9 +42,7 @@ type (
 	}
 )
 
-func NewSearch(c appengine.Context, userInput string, bc *dataloader.BibleCollection) (*Search, error) {
-	defer util.LogTime(c, time.Now(), "Querying took ")
-
+func NewSearch(c appengine.Context, userInput string) *Search {
 	s := new(Search)
 	s.userInput = strings.Replace(userInput, " ", "", -1)
 	s.userInput = strings.ToLower(s.userInput)
@@ -59,58 +57,72 @@ func NewSearch(c appengine.Context, userInput string, bc *dataloader.BibleCollec
 	// generate chapter verse queries
 	s.generateChapterVerseRange(c)
 
+	return s
+}
+
+func (s *Search) MatchedLiteBooks(c appengine.Context, books []dataloader.LiteBook) []dataloader.LiteBook {
+	defer util.LogTime(c, time.Now(), "Filtering Books took ")
+
+	filteredLiteBooks := make([]dataloader.LiteBook, 0, 10)
+	for _, book := range books {
+		if strings.Contains(book.OtherName, s.nondigitStr) || strings.Contains(book.LongName, s.nondigitStr) {
+			c.Infof("        Matched Book: %s\n", book.LongName)
+			filteredLiteBooks = append(filteredLiteBooks, book)
+		}
+		if len(filteredLiteBooks) > AUTOCOMPLETE_MAX_NUM_BOOKS {
+			break
+		}
+	}
+	return filteredLiteBooks
+}
+
+func (s *Search) FilterCV(c appengine.Context, partialBible *dataloader.Bible) {
+	defer util.LogTime(c, time.Now(), "Filtering Chapters and Verses took ")
 	// First filter by books
-	for _, bible := range bc.Bibles {
-		for _, book := range bible.Books {
-			if strings.Contains(book.OtherName, s.nondigitStr) || strings.Contains(book.LongName, s.nondigitStr) {
-				c.Infof("    Matched Book: %s\n", book.LongName)
-				if s.chapterVerseRange == nil {
-					c.Infof("        No Specified Chapter or Verses, assume Chapter 1 Verse 1\n")
-					chapter := book.Chapter(1)
-					verses := chapter.GetVerses(1, 1)
-					r := AutocompleteResult{
-						BibleVersion:  bible.Version,
-						BookId:        book.Id,
-						BookShortName: book.ShortName,
-						BookLongName:  book.LongName,
-						BookOtherName: book.OtherName,
-						ChapterNumber: 1,
-						VerseFrom:     1,
-						VerseTo:       1,
-						VerseText:     verses,
-					}
-					s.autocompleteResult = append(s.autocompleteResult, r)
-				} else {
-					// specified chapter and/or verses
-					for _, cvr := range s.chapterVerseRange {
-						chapter := book.Chapter(cvr.c)
-						if chapter == nil {
-							continue
-						}
-						verses := chapter.GetVerses(cvr.v1, cvr.v2)
-						if verses == nil {
-							continue
-						}
-						c.Infof("        Matched Chapter: %v, Verse %v - %v\n", cvr.c, cvr.v1, cvr.v2)
-						r := AutocompleteResult{
-							BibleVersion:  bible.Version,
-							BookId:        book.Id,
-							BookShortName: book.ShortName,
-							BookLongName:  book.LongName,
-							BookOtherName: book.OtherName,
-							ChapterNumber: cvr.c,
-							VerseFrom:     cvr.v1,
-							VerseTo:       min(cvr.v2, verses[len(verses)-1].Number),
-							VerseText:     verses,
-						}
-						s.autocompleteResult = append(s.autocompleteResult, r)
-					}
+	for _, book := range partialBible.Books {
+		if s.chapterVerseRange == nil {
+			c.Infof("        No Specified Chapter or Verses, assume Chapter 1 Verse 1\n")
+			chapter := book.Chapter(1)
+			verses := chapter.GetVerses(1, 1)
+			r := AutocompleteResult{
+				BibleVersion:  "和合本",
+				BookId:        book.Id,
+				BookShortName: book.ShortName,
+				BookLongName:  book.LongName,
+				BookOtherName: book.OtherName,
+				ChapterNumber: 1,
+				VerseFrom:     1,
+				VerseTo:       1,
+				VerseText:     verses,
+			}
+			s.autocompleteResult = append(s.autocompleteResult, r)
+		} else {
+			// specified chapter and/or verses
+			for _, cvr := range s.chapterVerseRange {
+				chapter := book.Chapter(cvr.c)
+				if chapter == nil {
+					continue
 				}
+				verses := chapter.GetVerses(cvr.v1, cvr.v2)
+				if verses == nil {
+					continue
+				}
+				c.Infof("        Matched Chapter: %v, Verse %v - %v\n", cvr.c, cvr.v1, cvr.v2)
+				r := AutocompleteResult{
+					BibleVersion:  "和合本",
+					BookId:        book.Id,
+					BookShortName: book.ShortName,
+					BookLongName:  book.LongName,
+					BookOtherName: book.OtherName,
+					ChapterNumber: cvr.c,
+					VerseFrom:     cvr.v1,
+					VerseTo:       min(cvr.v2, verses[len(verses)-1].Number),
+					VerseText:     verses[:min(3, len(verses))],
+				}
+				s.autocompleteResult = append(s.autocompleteResult, r)
 			}
 		}
 	}
-
-	return s, nil
 }
 
 func (s *Search) generateChapterVerseRange(c appengine.Context) {

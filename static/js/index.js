@@ -21,14 +21,17 @@ function autocomplete(event) {
 	}
 
 	var q = $('#searchInput').val()
-	if (q && q.length > 1) {
+	if (q && q.length >= 2) {
+		if (!$('#autocomplete').is(':visible')) {
+			$("#autocomplete").html("<img class='autocompleteLoading' src='/static/img/ajax-loader.gif' />");
+		}
+		$("#autocomplete").show();
 		pendingAutocomplete = $.ajax({
 			type: "GET",
 			url: "/autocomplete",
 			data: {query: q},
 			success: function(responseBody) {
 				$("#autocomplete").html(responseBody);
-				$("#autocomplete").show();
 			}
 		});
 	} else {

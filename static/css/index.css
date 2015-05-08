@@ -87,3 +87,14 @@ button.menu.active .icon-bar {
 #donateBtn {
 
 }
+
+#autocompleteNoResults {
+	padding: 5px 10px;
+	color: #999;
+}
+
+.autocompleteLoading {
+	display: block;
+	width: 32px;
+	margin: 5px auto;
+}

@@ -99,15 +99,21 @@ func autocompleteHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// load bible object from memcache
-	bc := getBibleCollection(c, w)
+	// get LiteBooks
+	liteBooks := getLiteBooks(c, w)
 
-	// ready to generate search conditions
+	// get a new Search object
 	c.Infof("Begin querying\n")
-	s, err := search.NewSearch(c, userQuery, bc)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+	s := search.NewSearch(c, userQuery)
+
+	// get matched Books
+	matchedLiteBooks := s.MatchedLiteBooks(c, liteBooks)
+
+	// get partial bible that contains these books
+	partialBible := getPartialBible(c, w, matchedLiteBooks)
+
+	// search by chapter and verses
+	s.FilterCV(c, partialBible)
 
 	// render view
 	view := template.Must(template.ParseFiles("view/autocomplete.html"))
@@ -183,8 +189,6 @@ func getBibleCollection(c appengine.Context, w http.ResponseWriter) *dataloader.
 		c.Infof("Memcache HIT for Bible collection\n")
 	}
 
-	// c.Debugf("!!!! map=%+v\n", bc.BookOtherNameIdMap)
-
 	return bc
 }
 
@@ -219,4 +223,28 @@ func getLiteBooks(c appengine.Context, w http.ResponseWriter) []dataloader.LiteB
 		return getBibleCollection(c, w).LiteBooks
 	}
 	return liteBooks
+}
+
+func getPartialBible(c appengine.Context, w http.ResponseWriter, liteBooks []dataloader.LiteBook) *dataloader.Bible {
+	c.Infof("Try to get Partial Bible from memcache or call getBibleCollection\n")
+	defer util.LogTime(c, time.Now(), "Getting Partial Bible took ")
+
+	bible, err := dataloader.MemcacheGetPartialBible(c, liteBooks)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	// if cache miss
+	if bible == nil {
+		bc := getBibleCollection(c, w)
+		var partialBible dataloader.Bible
+		fullBible := bc.FirstBible()
+		partialBible.Version = fullBible.Version
+		for _, book := range liteBooks {
+			partialBible.Books = append(partialBible.Books, *fullBible.Book(book.Id))
+		}
+		return &partialBible
+	}
+
+	return bible
 }

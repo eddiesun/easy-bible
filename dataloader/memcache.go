@@ -9,8 +9,6 @@ import (
 	"util"
 )
 
-type ()
-
 var bibleVersions = []string{"和合本"}
 var numOfBooksInBible = 66
 var liteBooksKey = "Lite Books"
@@ -145,4 +143,40 @@ func MemcacheGetLiteBooks(c appengine.Context) ([]LiteBook, error) {
 	}
 
 	return liteBooks, nil
+}
+
+func MemcacheGetPartialBible(c appengine.Context, liteBooks []LiteBook) (*Bible, error) {
+	defer util.LogTime(c, time.Now(), "    Getting Partial Bible from memcache ")
+	// prepare keys for some subset of books
+	var memcacheKeyList []string
+	for _, version := range bibleVersions {
+		for _, liteBook := range liteBooks {
+			memcacheKeyList = append(memcacheKeyList, getMemcacheKey(version, liteBook.Id))
+		}
+	}
+
+	// fetching json data from memcache
+	keyBookMap, err := memcache.GetMulti(c, memcacheKeyList)
+	if err != nil || keyBookMap == nil || len(keyBookMap) < len(memcacheKeyList) {
+		return nil, err
+	}
+
+	// convert json into object for chapters and verses
+	var bible Bible
+	for _, liteBook := range liteBooks {
+		key := getMemcacheKey(bibleVersions[0], liteBook.Id)
+		var book Book
+		// c.Debugf("*** key: %+v\n *** keyBookMap[key]%+v\n", key, keyBookMap[key])
+		if _, exist := keyBookMap[key]; !exist {
+			// some books are not in memcache. Consider the whole book is not in cache, For Now!
+			c.Debugf("***!!!!!!!*** NOT IN CACHE, key: %+v\n", key)
+			return nil, err
+		}
+		err := json.Unmarshal(keyBookMap[key].Value, &book)
+		if err != nil {
+			return nil, err
+		}
+		bible.Books = append(bible.Books, book)
+	}
+	return &bible, nil
 }
