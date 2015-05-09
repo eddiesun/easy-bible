@@ -8,8 +8,8 @@
 	<h2>{{.BookLongName}} 第{{.ChapterNumber}}章</h2>
 	<table class="partialTable">
 	{{ range $key, $value := .Verses }}
-		<tr data-verse="{{$value.Number}}">
-			<td><a name="{{$.BookId}}_{{$.ChapterNumber}}_{{$value.Number}}"></a><span>{{$value.Number}}</span> </td>
+		<tr data-chapter="{{$.ChapterNumber}}" data-verse="{{$value.Number}}">
+			<td><a name="c={{$.ChapterNumber}}&amp;v1={{$value.Number}}"></a><span>{{$value.Number}}</span> </td>
 			<td>{{$value.Text}}</td>
 		</tr>
 	{{ end }}

@@ -67,6 +67,7 @@ function highlightAutocompleteRow(index) {
 $(function() {
 	initPartial();
 	$(window).resize(checkLoadingPartial);
+	$('#btnLoadMore').click(reloadBook);
 });
 var partialParams = {
 	b: 0,
@@ -125,6 +126,12 @@ function loadPartial(firstLoad) {
 			checkVerseFont();
 			pendingPartial = null;
 			checkLoadingPartial();
+			if (firstLoad) {
+				scrollToVerse();
+				if (partialParams.v1 > 0) {
+					$('#btnLoadMore').show();
+				}
+			}
 		}
 	});
 }
@@ -147,6 +154,35 @@ function isLoadingMarkerInViewport() {
 	var box = $('#loadingMarker')[0].getBoundingClientRect();
 	return box.bottom - box.height < $(window).height();
 }
+
+function reloadBook(event) {
+	var partialContainer = $('#partialContainer');
+	var b = partialContainer.data('init-book-id'),
+		c = partialContainer.data('init-chapter'),
+		v1 = partialContainer.data('init-verse-begin'),
+		v2 = partialContainer.data('init-verse-end');
+	var param = {
+		'b' : b,
+		'c' : c
+	};
+	window.location.href = '?'+$.param(param)+'#'+c+'-'+v1;
+}
+
+function scrollToVerse() {
+	var hash = location.hash.replace('#', '');
+	var param = hash.split('-');
+	if (param.length >= 2) {
+		chapter = param[0];
+		verse = param[1];
+		var anchor = $("a[name='c="+chapter+"&v1="+verse+"']");
+		if (anchor) {
+			$('html, body').animate({scrollTop: anchor.offset().top-10}, 300, 'easeInSine');
+			$(".partialTable tr[data-chapter="+chapter+"][data-verse="+verse+"]").effect("highlight", {}, 8000);
+		}
+	}
+}
+
+
 
 
 
@@ -331,3 +367,5 @@ function moveAutocompleteRowUp() {
 		$('#autocompleteContainer .autocompleteRow[data-index='+activeRowIndex+']').addClass('active');
 	}
 }
+
+
