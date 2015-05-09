@@ -41,7 +41,7 @@ type PartialContext struct {
 }
 
 func DefaultHeaderContext() HeaderContext {
-	return HeaderContext{Title: "Easy Bible Lookup"}
+	return HeaderContext{Title: "Easy Bible"}
 }
 
 func DefaultFooterContext() FooterContext {

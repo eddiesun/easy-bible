@@ -2,17 +2,28 @@
  * Autocomplete
  */
 $(function() {
-	$('#searchButton').click(autocomplete);
+	$('#searchButton').click(function(event) {
+		event.preventDefault();
+		autocomplete(event);
+	});
 	$('#searchInput').keyup(autocomplete);
 	$('#searchInput').blur(function() {
 		if (!$('#autocomplete').is(":hover")) {
 			$('#autocomplete').hide();
 		}
 	});
+	$('#autocomplete').on('mouseenter', 'a.autocompleteRow', function(event) {
+		$('#autocompleteContainer .autocompleteRow.active').removeClass('active');
+		$(this).addClass('active');
+	});
 });
 
 var pendingAutocomplete
 function autocomplete(event) {
+	if (!isAutocompleteFiringKey(event.which)) {
+		return
+	}
+
 	event.preventDefault();
 
 	if (pendingAutocomplete != null) {
@@ -32,12 +43,21 @@ function autocomplete(event) {
 			data: {query: q},
 			success: function(responseBody) {
 				$("#autocomplete").html(responseBody);
+				highlightAutocompleteRow();
 			}
 		});
 	} else {
 		$("#autocomplete").hide();
 		$("#autocomplete").html("");
 	}
+}
+
+function highlightAutocompleteRow(index) {
+	if (!index) {
+		index = 0;
+	}
+	$('#autocompleteContainer .autocompleteRow').removeClass('active');
+	$('#autocompleteContainer .autocompleteRow[data-index='+index+']').addClass('active');
 }
 
 
@@ -238,6 +258,23 @@ $(function() {
 			decVerseFont();
 		}
 	});
+
+	$("#searchInput").keydown(function(event) {
+		if (event.which == 38) { // up key
+			event.preventDefault();
+			moveAutocompleteRowUp();
+		}
+		if (event.which == 40) { // down key
+			event.preventDefault();
+			moveAutocompleteRowDown();
+		}
+		if (event.which == 13) { // enter key
+			if ($('#autocomplete').is(':visible') && $('#autocompleteContainer .autocompleteRow.active')) {
+				event.preventDefault();
+				window.location.href = $('#autocompleteContainer .autocompleteRow.active').attr("href");
+			}
+		}
+	});
 });
 function incVerseFont() {
 	verseFontSize++;
@@ -252,4 +289,45 @@ function decVerseFont() {
 }
 function checkVerseFont() {
 	$('.partialTable').css('font-size', verseFontSize+'px');
+}
+
+function isAutocompleteFiringKey(key) {
+	if (key >= 48 && key <= 90) { // 0-9 a-z
+		return true;
+	}
+	if (key >= 96 && key <= 105) { // number pad 0-9
+		return true;
+	}
+	if (key == 46 || key == 8 || key == 32) { // delete key and backspace and space
+		return true;
+	}
+	if (key == 1) { // mouse left button
+		return true;
+	}
+	return false;
+}
+
+function moveAutocompleteRowDown() {
+	var activeRow = $('#autocompleteContainer .autocompleteRow.active');
+	if (activeRow) {
+		var activeRowIndex = activeRow.data('index');
+		activeRowIndex ++;
+		if (activeRowIndex >= $('#autocompleteContainer .autocompleteRow').length) {
+			activeRowIndex = $('#autocompleteContainer .autocompleteRow').length - 1;
+		}
+		activeRow.removeClass('active');
+		$('#autocompleteContainer .autocompleteRow[data-index='+activeRowIndex+']').addClass('active');
+	}
+}
+function moveAutocompleteRowUp() {
+	var activeRow = $('#autocompleteContainer .autocompleteRow.active');
+	if (activeRow) {
+		var activeRowIndex = activeRow.data('index');
+		activeRowIndex --;
+		if (activeRowIndex < 0) {
+			activeRowIndex = 0;
+		}
+		activeRow.removeClass('active');
+		$('#autocompleteContainer .autocompleteRow[data-index='+activeRowIndex+']').addClass('active');
+	}
 }

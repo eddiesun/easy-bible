@@ -57,15 +57,18 @@ button.menu.active .icon-bar {
 	text-decoration: none;
 	padding: 5px 10px;
 	cursor: pointer;
+	transition: all 0.2 ease;
 }
 .autocompleteRow:hover {
-	color: white;
 	text-decoration: inherit;
+}
+.autocompleteRow.active {
+	color: white;
 	background-color: #03A9F4;
 }
-.autocompleteRow:hover .grey,
-.autocompleteRow:hover .black {
-	color: white;
+.autocompleteRow.active .grey,
+.autocompleteRow.active .black {
+	color: inherit;
 }
 
 #siteFooter {
@@ -82,10 +85,6 @@ button.menu.active .icon-bar {
 	margin-right: 20px;
 	top: -20px;
 	z-index: 10;
-}
-
-#donateBtn {
-
 }
 
 #autocompleteNoResults {

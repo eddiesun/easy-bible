@@ -1,7 +1,8 @@
-<div class="autocompleteContainer">
+<div id="autocompleteContainer">
 	{{ with gt (len .Result) 0 }}
 		{{ range $key, $value := $.Result }}
 			<a class="autocompleteRow"
+				data-index="{{$key}}"
 				data-version="{{ $value.BibleVersion }}"
 				data-bookId="{{ $value.BookId }}"
 				data-BookShortName="{{ $value.BookShortName }}"
