@@ -9,18 +9,20 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<div style="float:right;">
-					<button id="searchButton" class="btn btn-primary" style="width:60px;">
-						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				<div class="floatRight">
+					<button id="questionButton" type="button" class="btn btn-primary font18 padding_t_5 padding_r_10 padding_b_2 padding_l_10" title="How to use">
+						<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
 					</button>
 				</div>
-				<div style="overflow:hidden; padding-right:5px;">
-					<input id="searchInput" type="text" class="form-control" style="width:100%;" autocomplete="off" placeholder="yuehan316">
+				<div class="padding_r_5 overflowHidden relative">
+					<input id="searchInput" type="text" class="form-control width_100p padding_l_32" autocomplete="off" placeholder="yuehan316">
+					<span class="glyphicon glyphicon-search absolute font16 semiBlack padding_l_10 textShadow line_34 top_0 left_0" aria-hidden="true"></span>
 				</div>
 			</form>
 			<div id="autocomplete" style="display:none;"></div>
 		</div>
 		<div class="col-xs-12">
+			<!-- Menu container that contains Book buttons and verse buttons -->
 			<div id="menuContainer" style="display:none;">
 				<button type="button" id="unselectBookMenu" style="display:none;" class="margin_b_5 margin_t_5 btn btn-default">
 					<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
@@ -37,6 +39,61 @@
 					{{ end }}
 				</div>
 				<div id="chapterBlock" style="display:none"></div>
+			</div>
+
+			<!-- Help container that contains instructions of how to use the site -->
+			<div id="helpContainer" class="well padding_t_0 padding_b_0" style="display:none;">
+				<!-- <h3 class="margin_b_20">Examples 示例</h3> -->
+				<h4>Language 語言</h4>
+				<p>目前只支持<mark>繁體中文新標點和合本神版（CUNP－神）</mark>，將來會加入英文NIV版本，並且會加入中英文對照模式。 Engish Bible (NIV) will be added in the future.</p>
+
+				<h4 class="margin_t_30">Search 搜索 <small>拼音或繁體中文</small></h4>
+
+
+				<h5 class="margin_t_20">搜索具體某一節經文</h5>
+				<div class="relative form-control padding_l_32 width_140 floatLeft">
+					<span>yuehan<span class="text-primary">3</span><span class="text-success">16</span></span>
+					<span class="glyphicon glyphicon-search absolute font16 semiBlack padding_l_10 textShadow line_34 top_0 left_0" aria-hidden="true"></span>
+				</div>
+				<div class="line_34 margin_l_10 floatLeft">约翰福音 <span class="text-primary">3章</span> <span class="text-success">16节</span></div>
+				<div class="clear"></div>
+
+				<div class="relative form-control padding_l_32 width_140 floatLeft margin_t_5">
+					<span>约翰<span class="text-primary">3</span><span class="text-success">16</span></span>
+					<span class="glyphicon glyphicon-search absolute font16 semiBlack padding_l_10 textShadow line_34 top_0 left_0" aria-hidden="true"></span>
+				</div>
+				<div class="line_34 margin_l_10 floatLeft margin_t_5">约翰福音 <span class="text-primary">3章</span> <span class="text-success">16节</span></div>
+				<div class="clear"></div>
+
+
+				<h5 class="margin_t_20">搜索經節範圍</h5>
+				<div class="relative form-control padding_l_32 width_140 floatLeft">
+					<span>gelinduo<span class="text-primary">13</span><span class="text-success">48</span></span>
+					<span class="glyphicon glyphicon-search absolute font16 semiBlack padding_l_10 textShadow line_34 top_0 left_0" aria-hidden="true"></span>
+				</div>
+				<div class="line_34 margin_l_10 floatLeft">哥林多前書 <span class="text-primary">13章</span> <span class="text-success">4-8節<span></div>
+				<div class="clear"></div>
+
+				<div class="relative form-control padding_l_32 width_140 floatLeft margin_t_5">
+					<span>哥林多<span class="text-primary">13</span><span class="text-success">48</span></span>
+					<span class="glyphicon glyphicon-search absolute font16 semiBlack padding_l_10 textShadow line_34 top_0 left_0" aria-hidden="true"></span>
+				</div>
+				<div class="line_34 margin_l_10 floatLeft margin_t_5">哥林多前書 <span class="text-primary">13章</span> <span class="text-success">4-8節<span></div>
+				<div class="clear"></div>
+
+
+				<h4 class="margin_t_30">Hot Keys 快捷鍵</h4>
+				<div class="margin_t_10">按 <kbd class="width_28">+</kbd> 放大字體</div>
+				<div class="margin_t_10">按 <kbd class="width_28">&ndash;</kbd> 縮小字體</div>
+				<div class="margin_t_10">按 <kbd class="width_28">B</kbd> 打開／关闭選書菜單</div>
+				<div class="margin_t_10">按 <kbd class="width_28">H</kbd> 打開／关闭帮助菜單</div>
+
+				<br /><br />
+				<a target="_new" href="mailto:eddiexsun+easybible@gmail.com?Subject=Feature+Request">Feature Request 建議增加新功能</a>
+				｜
+				<a target="_new" href="mailto:eddiexsun+easybible@gmail.com?Subject=Comments">Contact Me 聯繫我</a>
+
+				<div class="margin_t_20"></div>
 			</div>
 		</div>
 	</div>

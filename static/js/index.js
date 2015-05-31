@@ -194,6 +194,10 @@ $(function() {
 	$("button.menu").click(function() {
 		if (!menuAnimating) {
 			if (!$('#menuContainer').is(':visible')) {
+				// hide help menu if any are already visible
+				$('#helpContainer').hide();
+
+				// show book menu
 				menuAnimating = true;
 				$("#menuContainer").slideDown({
 					duration: 1000,
@@ -242,7 +246,6 @@ $(function() {
 
 		// scroll to top book menu if screen is too low
 		scrollToBookMenu();
-
 	});
 
 	$('#unselectBookMenu').click(function() {
@@ -282,10 +285,57 @@ function scrollToBookMenu() {
 }
 
 /**
+ * Help menu
+ */
+var helpContainerAnimating = false;
+$(function() {
+	$('#questionButton').click(function(event) {
+		if (helpContainerAnimating) {
+			return;
+		}
+		// hide book menu container if that's open
+		$('#menuContainer').hide();
+		$("button.menu").removeClass('active');
+
+		// if help panel is open, close it
+		if ($('#helpContainer').is(':visible')) {
+			helpContainerAnimating = true;
+			$("#helpContainer").slideUp({
+				duration: 600,
+				easing: "easeOutCubic",
+				complete: function() {
+					helpContainerAnimating = false;
+				}
+			});
+			return
+		}
+
+		// if help panel is not open, slide it open
+		if (!$('#helpContainer').is(':visible')) {
+			helpContainerAnimating = true;
+			$("#helpContainer").slideDown({
+				duration: 600,
+				easing: "easeOutCubic",
+				complete: function() {
+					helpContainerAnimating = false;
+				}
+			});
+			return
+		}
+	});
+});
+
+/**
  * Hot keys
  */
 var verseFontSize = 16;
 $(function() {
+	// first check if verseFontSize is in cookie
+	if (Cookies.get('verseFontSize')) {
+		verseFontSize = Cookies.get('verseFontSize');
+	}
+
+	// bind + - keys to change font size
 	$(document).keypress(function(event) {
 		if (event.which == 61) { // + key was pressed. increase verse font
 			incVerseFont();
@@ -293,8 +343,20 @@ $(function() {
 		if (event.which == 45) { // - key was pressed. decrease verse font
 			decVerseFont();
 		}
+		
+		// if search input has focus (user is typing), disable the hot keys
+		if ($("#searchInput").is(":focus")) {
+			return;
+		}
+		if (event.which == 66 || event.which == 98) { // bind 'b' and 'B' key to toggle help menu
+			$('button.menu').click();
+		}
+		if (event.which == 72 || event.which == 104) { // bind 'h' and 'H' key to toggle help menu
+			$('#questionButton').click();
+		}
 	});
 
+	// bind up and down arrow key events to move from rows to rows in autocomlete list
 	$("#searchInput").keydown(function(event) {
 		if (event.which == 38) { // up key
 			event.preventDefault();
@@ -314,10 +376,12 @@ $(function() {
 });
 function incVerseFont() {
 	verseFontSize++;
+	Cookies.set('verseFontSize', verseFontSize, {expires: 365});
 	checkVerseFont();
 }
 function decVerseFont() {
 	verseFontSize--;
+	Cookies.set('verseFontSize', verseFontSize, {expires: 365});
 	checkVerseFont();
 
 	// if loading box appears due to decreasing font

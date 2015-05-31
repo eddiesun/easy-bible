@@ -3,6 +3,25 @@ body {
 	height: 100%;
 }
 
+kbd {
+	text-align: center;
+	padding: .1em .6em;
+	border: 1px solid #ccc;
+	font-size: 14px;
+	font-family: Arial,Helvetica,sans-serif;
+	background-color: #f7f7f7;
+	color: #333;
+	-moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+	border-radius: 3px;
+	display: inline-block;
+	/*margin: 0 .1em;*/
+	text-shadow: 0 1px 0 #fff;
+	/*line-height: 1.4;*/
+	white-space: nowrap;
+}
+
 .ellipsis {
 	white-space: nowrap;
 	overflow: hidden;
@@ -11,31 +30,70 @@ body {
 
 .center {text-align: center;}
 
+.margin_t_0 {margin-top: 0 !important;}
 .margin_t_2 {margin-top: 2px;}
 .margin_t_5 {margin-top: 5px;}
 .margin_t_10 {margin-top: 10px;}
 .margin_t_20 {margin-top: 20px;}
+.margin_t_30 {margin-top: 30px;}
 
 .margin_b_2 {margin-bottom: 2px;}
 .margin_b_5 {margin-bottom: 5px;}
 .margin_b_10 {margin-bottom: 10px;}
-.margin_b_20 {margin-bottom: 20px;}
+.margin_b_20 {margin-bottom: 20px !important;}
 .margin_b_120 {margin-bottom: 120px;}
+
+.margin_l_10 {margin-left: 10px;}
+
+.padding_t_0 {padding-top: 0 !important;}
+.padding_t_5 {padding-top: 5px;}
+
+.padding_r_5 {padding-right: 5px;}
+.padding_r_10 {padding-right: 10px;}
+
+.padding_b_0 {padding-bottom: 0 !important;}
+.padding_b_2 {padding-bottom: 2px;}
+
+.padding_l_5 {padding-left: 5px;}
+.padding_l_10 {padding-left: 10px;}
+.padding_l_32 {padding-left: 32px;}
 
 .bg_grey {background-color: #EDEDED;}
 
 .min_width_42 {min-width: 42px;}
-.width_100p {width: 100%;}
+.width_28 {width: 28px;}
+.width_140 {width: 140px;}
+.width_200 {width: 200px;}
+.width_100p {width: 100% !important;}
 
 .relative {position: relative;}
+.absolute {position: absolute;}
+
+.top_0 {top: 0;}
+.bottom_0 {bottom: 0;}
+.left_0 {left: 0;}
+.right_0 {right: 0;}
 
 .z1000 {z-index: 1000;}
 
+.lightGrey {color: #AAA;}
 .grey {color: #888;}
+.semiBlack {color: #333;}
 .black {color: #000;}
 
 .vertical_middle {vertical-align: middle;}
 
+.line_34 {line-height: 34px;}
+
 .font16 {font-size: 16px;}
+.font18 {font-size: 18px;}
 
 .bold {font-weight: bold;}
+
+.textShadow {text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);}
+
+.floatRight {float: right;}
+.floatLeft {float: left;}
+.clear {clear: both;}
+
+.overflowHidden {overflow: hidden;}
