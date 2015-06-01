@@ -30,15 +30,16 @@ type (
 	}
 
 	AutocompleteResult struct {
-		BibleVersion  string
-		BookId        int
-		BookShortName string
-		BookLongName  string
-		BookOtherName string
-		ChapterNumber int
-		VerseFrom     int
-		VerseTo       int
-		VerseText     []dataloader.Verse
+		BibleVersion      string
+		BookId            int
+		BookShortName     string
+		BookLongName      string
+		BookOtherName     string
+		BookOtherNameInit string
+		ChapterNumber     int
+		VerseFrom         int
+		VerseTo           int
+		VerseText         []dataloader.Verse
 	}
 )
 
@@ -65,7 +66,7 @@ func (s *Search) MatchedLiteBooks(c appengine.Context, books []dataloader.LiteBo
 
 	filteredLiteBooks := make([]dataloader.LiteBook, 0, 10)
 	for _, book := range books {
-		if strings.Contains(book.OtherName, s.nondigitStr) || strings.Contains(book.LongName, s.nondigitStr) {
+		if strings.Contains(book.OtherNameInit, s.nondigitStr) || strings.Contains(book.OtherName, s.nondigitStr) || strings.Contains(book.LongName, s.nondigitStr) {
 			c.Infof("        Matched Book: %s\n", book.LongName)
 			filteredLiteBooks = append(filteredLiteBooks, book)
 		}
@@ -85,15 +86,16 @@ func (s *Search) FilterCV(c appengine.Context, partialBible *dataloader.Bible) {
 			chapter := book.Chapter(1)
 			verses := chapter.GetVerses(1, 1)
 			r := AutocompleteResult{
-				BibleVersion:  "和合本",
-				BookId:        book.Id,
-				BookShortName: book.ShortName,
-				BookLongName:  book.LongName,
-				BookOtherName: book.OtherName,
-				ChapterNumber: 1,
-				VerseFrom:     1,
-				VerseTo:       1,
-				VerseText:     verses,
+				BibleVersion:      "和合本",
+				BookId:            book.Id,
+				BookShortName:     book.ShortName,
+				BookLongName:      book.LongName,
+				BookOtherName:     book.OtherName,
+				BookOtherNameInit: book.OtherNameInit,
+				ChapterNumber:     1,
+				VerseFrom:         1,
+				VerseTo:           1,
+				VerseText:         verses,
 			}
 			s.autocompleteResult = append(s.autocompleteResult, r)
 		} else {
@@ -109,15 +111,16 @@ func (s *Search) FilterCV(c appengine.Context, partialBible *dataloader.Bible) {
 				}
 				c.Infof("        Matched Chapter: %v, Verse %v - %v\n", cvr.c, cvr.v1, cvr.v2)
 				r := AutocompleteResult{
-					BibleVersion:  "和合本",
-					BookId:        book.Id,
-					BookShortName: book.ShortName,
-					BookLongName:  book.LongName,
-					BookOtherName: book.OtherName,
-					ChapterNumber: cvr.c,
-					VerseFrom:     cvr.v1,
-					VerseTo:       min(cvr.v2, verses[len(verses)-1].Number),
-					VerseText:     verses[:min(3, len(verses))],
+					BibleVersion:      "和合本",
+					BookId:            book.Id,
+					BookShortName:     book.ShortName,
+					BookLongName:      book.LongName,
+					BookOtherName:     book.OtherName,
+					BookOtherNameInit: book.OtherNameInit,
+					ChapterNumber:     cvr.c,
+					VerseFrom:         cvr.v1,
+					VerseTo:           min(cvr.v2, verses[len(verses)-1].Number),
+					VerseText:         verses[:min(3, len(verses))],
 				}
 				s.autocompleteResult = append(s.autocompleteResult, r)
 			}

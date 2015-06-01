@@ -1,5 +1,7 @@
 package dataloader
 
+/*
+
 import (
 	"appengine"
 	"appengine/datastore"
@@ -133,3 +135,4 @@ func min(a, b int) int {
 	}
 	return b
 }
+*/

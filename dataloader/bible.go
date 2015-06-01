@@ -2,7 +2,7 @@ package dataloader
 
 import (
 	"appengine"
-	"appengine/datastore"
+	_ "appengine/datastore"
 	"encoding/json"
 	"encoding/xml"
 	"io/ioutil"
@@ -20,58 +20,60 @@ type (
 		Version string `xml:"version,attr"`
 		Books   []Book `xml:"book"`
 	}
-	PBible struct {
-		Type    string
-		Key     *datastore.Key
-		Version string
-	}
+	// PBible struct {
+	// 	Type    string
+	// 	Key     *datastore.Key
+	// 	Version string
+	// }
 
 	Book struct {
-		Id        int       `xml:"id,attr"`
-		ShortName string    `xml:"shortName,attr"`
-		LongName  string    `xml:"name,attr"`
-		OtherName string    `xml:"pinyin,attr"`
-		Chapters  []Chapter `xml:"chapter"`
+		Id            int       `xml:"id,attr"`
+		ShortName     string    `xml:"shortName,attr"`
+		LongName      string    `xml:"name,attr"`
+		OtherName     string    `xml:"pinyin,attr"`
+		OtherNameInit string    `xml:"pinyinInitial,attr"`
+		Chapters      []Chapter `xml:"chapter"`
 	}
-	PBook struct {
-		Type         string
-		Key          *datastore.Key
-		BibleVersion string
-		Id           int
-		ShortName    string
-		LongName     string
-		OtherName    string
-	}
+	// PBook struct {
+	// 	Type         string
+	// 	Key          *datastore.Key
+	// 	BibleVersion string
+	// 	Id           int
+	// 	ShortName    string
+	// 	LongName     string
+	// 	OtherName    string
+	// }
 	LiteBook struct {
-		Id          int
-		ShortName   string
-		LongName    string
-		OtherName   string
-		NumChapters int
+		Id            int
+		ShortName     string
+		LongName      string
+		OtherName     string
+		OtherNameInit string
+		NumChapters   int
 	}
 
 	Chapter struct {
 		Number int     `xml:"number,attr"`
 		Verses []Verse `xml:"verse"`
 	}
-	PChapter struct {
-		Type          string
-		Key           *datastore.Key
-		BookId        int
-		ChapterNumber int
-	}
+	// PChapter struct {
+	// 	Type          string
+	// 	Key           *datastore.Key
+	// 	BookId        int
+	// 	ChapterNumber int
+	// }
 
 	Verse struct {
 		Number int    `xml:"number,attr"`
 		Text   string `xml:",innerxml"`
 	}
-	PVerse struct {
-		Type          string
-		Key           *datastore.Key
-		ChapterNumber int
-		VerseNumber   int
-		Text          string
-	}
+	// PVerse struct {
+	// 	Type          string
+	// 	Key           *datastore.Key
+	// 	ChapterNumber int
+	// 	VerseNumber   int
+	// 	Text          string
+	// }
 )
 
 func UnmarshalBibleXml(biblexml []byte) (*Bible, error) {
@@ -131,6 +133,7 @@ func NewLiteBook(b *Book) *LiteBook {
 	lb.ShortName = b.ShortName
 	lb.LongName = b.LongName
 	lb.OtherName = b.OtherName
+	lb.OtherNameInit = b.OtherNameInit
 	lb.NumChapters = len(b.Chapters)
 	return lb
 }

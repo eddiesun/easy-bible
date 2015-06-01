@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bible version="和合本">
-	<book id="1" shortName="創" name="創世記" pinyin="chuangshiji">
+	<book id="1" shortName="創" name="創世記" pinyin="chuangshiji" pinyinInitial="csj">
 		<chapter number="1">
 			<verse number="1">起初，神創造天地</verse>
 			<verse number="2">地是空虛混沌，淵面黑暗；神的靈運行在水面上。</verse>
@@ -1635,7 +1635,7 @@
 			<verse number="26">約瑟死了，正一百一十歲。人用香料將他薰了，把他收殮在棺材裡，停在埃及。</verse>
 		</chapter>
 	</book>
-	<book id="2" shortName="出" name="出埃及記" pinyin="chuaijiji">
+	<book id="2" shortName="出" name="出埃及記" pinyin="chuaijiji" pinyinInitial="cajj">
 		<chapter number="1">
 			<verse number="1">以色列的眾子，各帶家眷，和雅各一同來到埃及。他們的名字記在下面。</verse>
 			<verse number="2">有流便、西緬、利未、猶大、</verse>
@@ -3050,7 +3050,7 @@
 			<verse number="38">日間，耶和華的雲彩是在帳幕以上；夜間，雲中有火，在以色列全家的眼前。在他們所行的路上都是這樣。</verse>
 		</chapter>
 	</book>
-	<book id="3" shortName="利" name="利未記" pinyin="liweiji">
+	<book id="3" shortName="利" name="利未記" pinyin="liweiji" pinyinInitial="lwj">
 		<chapter number="1">
 			<verse number="1">耶和華從會幕中呼叫摩西，對他說：</verse>
 			<verse number="2">你曉諭以色列人說：你們中間若有人獻供物給耶和華，要從牛群羊群中獻牲畜為供物。</verse>
@@ -3965,7 +3965,7 @@
 			<verse number="34">這就是耶和華在西乃山為以色列人所吩咐摩西的命令。</verse>
 		</chapter>
 	</book>
-	<book id="4" shortName="民" name="民數記" pinyin="minshuji">
+	<book id="4" shortName="民" name="民數記" pinyin="minshuji" pinyinInitial="msj">
 		<chapter number="1">
 			<verse number="1">以色列人出埃及地後，第二年二月初一日，耶和華在西乃的曠野、會幕中曉諭摩西說：</verse>
 			<verse number="2">你要按以色列全會眾的家室、宗族、人名的數目計算所有的男丁。</verse>
@@ -5327,7 +5327,7 @@
 			<verse number="13">這是耶和華在摩押平原─約但河邊、耶利哥對面─藉著摩西所吩咐以色列人的命令典章。</verse>
 		</chapter>
 	</book>
-	<book id="5" shortName="申" name="申命記" pinyin="shenmingji">
+	<book id="5" shortName="申" name="申命記" pinyin="shenmingji" pinyinInitial="smj">
 		<chapter number="1">
 			<verse number="1">以下所記的是摩西在約但河東的曠野、疏弗對面的亞拉巴─就是巴蘭、陀弗、拉班、哈洗錄、底撒哈中間─向以色列眾人所說的話。</verse>
 			<verse number="2">（從何烈山經過西珥山到加低斯巴尼亞有十一天的路程。）</verse>
@@ -6356,7 +6356,7 @@
 			<verse number="12">又在以色列眾人眼前顯大能的手，行一切大而可畏的事。</verse>
 		</chapter>
 	</book>
-	<book id="6" shortName="書" name="約書亞記" pinyin="yueshuyaji">
+	<book id="6" shortName="書" name="約書亞記" pinyin="yueshuyaji" pinyinInitial="ysyj">
 		<chapter number="1">
 			<verse number="1">耶和華的僕人摩西死了以後，耶和華曉諭摩西的幫手，嫩的兒子約書亞，說：</verse>
 			<verse number="2">我的僕人摩西死了。現在你要起來，和眾百姓過這約但河，往我所要賜給以色列人的地去。</verse>
@@ -7064,7 +7064,7 @@
 			<verse number="33">亞倫的兒子以利亞撒也死了，就把他葬在他兒子非尼哈所得、以法蓮山地的小山上。</verse>
 		</chapter>
 	</book>
-	<book id="7" shortName="士" name="士師記" pinyin="shishiji">
+	<book id="7" shortName="士" name="士師記" pinyin="shishiji" pinyinInitial="ssj">
 		<chapter number="1">
 			<verse number="1">約書亞死後，以色列人求問耶和華說：我們中間誰當首先上去攻擊迦南人，與他們爭戰？</verse>
 			<verse number="2">耶和華說：猶大當先上去，我已將那地交在他手中。</verse>
@@ -7726,7 +7726,7 @@
 			<verse number="25">那時，以色列中沒有王，各人任意而行。</verse>
 		</chapter>
 	</book>
-	<book id="8" shortName="得" name="路得記" pinyin="ludeji">
+	<book id="8" shortName="得" name="路得記" pinyin="ludeji" pinyinInitial="ldj">
 		<chapter number="1">
 			<verse number="1">當士師秉政的時候，國中遭遇饑荒。在猶大、伯利恆，有一個人帶著妻子和兩個兒子往摩押地去寄居。</verse>
 			<verse number="2">這人名叫以利米勒，他的妻名叫拿俄米；他兩個兒子，一個名叫瑪倫，一個名叫基連，都是猶大伯利恆的以法他人。他們到了摩押地，就住在那裡。</verse>
@@ -7821,7 +7821,7 @@
 			<verse number="22">俄備得生耶西；耶西生大衛。</verse>
 		</chapter>
 	</book>
-	<book id="9" shortName="撒上" name="撒母耳記上" pinyin="samuerjishang">
+	<book id="9" shortName="撒上" name="撒母耳記上" pinyin="samuerjishang" pinyinInitial="smejs">
 		<chapter number="1">
 			<verse number="1">以法蓮山地的拉瑪瑣非有一個以法蓮人，名叫以利加拿，是蘇弗的玄孫，託戶的曾孫，以利戶的孫子，耶羅罕的兒子。</verse>
 			<verse number="2">他有兩個妻：一名哈拿，一名毘尼拿。毘尼拿有兒女，哈拿沒有兒女。</verse>
@@ -8695,7 +8695,7 @@
 			<verse number="13">將他們骸骨葬在雅比的垂絲柳樹下，就禁食七日。</verse>
 		</chapter>
 	</book>
-	<book id="10" shortName="撒下" name="撒母耳記下" pinyin="samuerjixia">
+	<book id="10" shortName="撒下" name="撒母耳記下" pinyin="samuerjixia" pinyinInitial="smejx">
 		<chapter number="1">
 			<verse number="1">掃羅死後，大衛擊殺亞瑪力人回來，在洗革拉住了兩天。</verse>
 			<verse number="2">第三天，有一人從掃羅的營裡出來，衣服撕裂，頭蒙灰塵，到大衛面前伏地叩拜。</verse>
@@ -9440,7 +9440,7 @@
 			<verse number="25">大衛在那裡為耶和華築了一座壇，獻燔祭和平安祭。如此，耶和華垂聽國民所求的，瘟疫在以色列人中就止住了。</verse>
 		</chapter>
 	</book>
-	<book id="11" shortName="王上" name="列王紀上" pinyin="liewangjishang">
+	<book id="11" shortName="王上" name="列王紀上" pinyin="liewangjishang" pinyinInitial="lwjs">
 		<chapter number="1">
 			<verse number="1">大衛王年紀老邁，雖用被遮蓋，仍不覺暖。</verse>
 			<verse number="2">所以臣僕對他說：不如為我主我王尋找一個處女，使他伺候王，奉養王，睡在王的懷中，好叫我主我王得暖。</verse>
@@ -10302,7 +10302,7 @@
 			<verse number="53">他照他父親一切所行的，事奉敬拜巴力，惹耶和華─以色列神的怒氣。</verse>
 		</chapter>
 	</book>
-	<book id="12" shortName="王下" name="列王紀下" pinyin="liewangjixia">
+	<book id="12" shortName="王下" name="列王紀下" pinyin="liewangjixia" pinyinInitial="lwjx">
 		<chapter number="1">
 			<verse number="1">亞哈死後，摩押背叛以色列。</verse>
 			<verse number="2">亞哈謝在撒瑪利亞，一日從樓上的欄杆裡掉下來，就病了；於是差遣使者說：你們去問以革倫的神巴力西卜，我這病能好不能好。</verse>
@@ -11073,7 +11073,7 @@
 			<verse number="30">王賜他所需用的食物，日日賜他一分，終身都是這樣。</verse>
 		</chapter>
 	</book>
-	<book id="13" shortName="代上" name="歷代志上" pinyin="lidaizhishang">
+	<book id="13" shortName="代上" name="歷代志上" pinyin="lidaizhishang" pinyinInitial="ldzs">
 		<chapter number="1">
 			<verse number="1">亞當生塞特；塞特生以挪士；</verse>
 			<verse number="2">以挪士生該南；該南生瑪勒列；瑪勒列生雅列；</verse>
@@ -12075,7 +12075,7 @@
 			<verse number="30">他的國事和他的勇力，以及他和以色列並列國所經過的事都寫在這書上。</verse>
 		</chapter>
 	</book>
-	<book id="14" shortName="代下" name="歷代志下" pinyin="lidaizhixia">
+	<book id="14" shortName="代下" name="歷代志下" pinyin="lidaizhixia" pinyinInitial="ldzx">
 		<chapter number="1">
 			<verse number="1">大衛的兒子所羅門國位堅固；耶和華─他的神與他同在，使他甚為尊大。</verse>
 			<verse number="2">所羅門吩咐以色列眾人，就是千夫長、百夫長、審判官、首領與族長都來。</verse>
@@ -12971,7 +12971,7 @@
 			<verse number="23">波斯王古列如此說：耶和華─天上的神已將天下萬國賜給我，又囑咐我在猶大的耶路撒冷為他建造殿宇。你們中間凡作他子民的，可以上去，願耶和華─他的神與他同在。</verse>
 		</chapter>
 	</book>
-	<book id="15" shortName="拉" name="以斯拉記" pinyin="yisilaji">
+	<book id="15" shortName="拉" name="以斯拉記" pinyin="yisilaji" pinyinInitial="yslj">
 		<chapter number="1">
 			<verse number="1">波斯王古列元年，耶和華為要應驗藉耶利米口所說的話，就激動波斯王古列的心，使他下詔通告全國說：</verse>
 			<verse number="2">波斯王古列如此說：耶和華天上的神已將天下萬國賜給我，又囑咐我在猶大的耶路撒冷為他建造殿宇。</verse>
@@ -13273,7 +13273,7 @@
 			<verse number="44">這些人都娶了外邦女子為妻，其中也有生了兒女的。</verse>
 		</chapter>
 	</book>
-	<book id="16" shortName="尼" name="尼希米記" pinyin="niximiji">
+	<book id="16" shortName="尼" name="尼希米記" pinyin="niximiji" pinyinInitial="nxmj">
 		<chapter number="1">
 			<verse number="1">哈迦利亞的兒子尼希米的言語如下：亞達薛西王二十年基斯流月，我在書珊城的宮中。</verse>
 			<verse number="2">那時，有我一個弟兄哈拿尼，同著幾個人從猶大來。我問他們那些被擄歸回、剩下逃脫的猶大人和耶路撒冷的光景。</verse>
@@ -13707,7 +13707,7 @@
 			<verse number="31">我又派百姓按定期獻柴和初熟的土產。我的神啊，求你記念我，施恩與我。</verse>
 		</chapter>
 	</book>
-	<book id="17" shortName="斯" name="以斯帖記" pinyin="yisitieji">
+	<book id="17" shortName="斯" name="以斯帖記" pinyin="yisitieji" pinyinInitial="ystj">
 		<chapter number="1">
 			<verse number="1">亞哈隨魯作王，從印度直到古實，統管一百二十七省。</verse>
 			<verse number="2">亞哈隨魯王在書珊城的宮登基；</verse>
@@ -13896,7 +13896,7 @@
 			<verse number="3">猶大人末底改作亞哈隨魯王的宰相，在猶大人中為大，得他眾弟兄的喜悅，為本族的人求好處，向他們說和平的話。</verse>
 		</chapter>
 	</book>
-	<book id="18" shortName="伯" name="約伯記" pinyin="yueboji">
+	<book id="18" shortName="伯" name="約伯記" pinyin="yueboji" pinyinInitial="ybj">
 		<chapter number="1">
 			<verse number="1">烏斯地有一個人名叫約伯；那人完全正直，敬畏神，遠離惡事。</verse>
 			<verse number="2">他生了七個兒子，三個女兒。</verse>
@@ -15052,7 +15052,7 @@
 			<verse number="17">這樣，約伯年紀老邁，日子滿足而死。</verse>
 		</chapter>
 	</book>
-	<book id="19" shortName="詩" name="詩篇" pinyin="shipian">
+	<book id="19" shortName="詩" name="詩篇" pinyin="shipian" pinyinInitial="sp">
 		<chapter number="1">
 			<verse number="1">不從惡人的計謀，不站罪人的道路，不坐褻慢人的座位，</verse>
 			<verse number="2">惟喜愛耶和華的律法，晝夜思想，這人便為有福！</verse>
@@ -17815,7 +17815,7 @@
 			<verse number="6">凡有氣息的都要讚美耶和華！你們要讚美耶和華！</verse>
 		</chapter>
 	</book>
-	<book id="20" shortName="箴" name="箴言" pinyin="zhenyan">
+	<book id="20" shortName="箴" name="箴言" pinyin="zhenyan" pinyinInitial="zy">
 		<chapter number="1">
 			<verse number="1">以色列王大衛兒子所羅門的箴言：</verse>
 			<verse number="2">要使人曉得智慧和訓誨，分辨通達的言語，</verse>
@@ -18794,7 +18794,7 @@
 			<verse number="31">願他享受操作所得的；願他的工作在城門口榮耀他。</verse>
 		</chapter>
 	</book>
-	<book id="21" shortName="傳" name="傳道書" pinyin="chuandaoshu">
+	<book id="21" shortName="傳" name="傳道書" pinyin="chuandaoshu" pinyinInitial="cds">
 		<chapter number="1">
 			<verse number="1">在耶路撒冷作王、大衛的兒子、傳道者的言語。</verse>
 			<verse number="2">傳道者說：虛空的虛空，虛空的虛空，凡事都是虛空。</verse>
@@ -19042,7 +19042,7 @@
 			<verse number="14">因為人所做的事，連一切隱藏的事，無論是善是惡，神都必審問。</verse>
 		</chapter>
 	</book>
-	<book id="22" shortName="歌" name="雅歌" pinyin="yage">
+	<book id="22" shortName="歌" name="雅歌" pinyin="yage" pinyinInitial="yg">
 		<chapter number="1">
 			<verse number="1">所羅門的歌，是歌中的雅歌。（新娘）</verse>
 			<verse number="2">願他用口與我親嘴；因你的愛情比酒更美。</verse>
@@ -19177,7 +19177,7 @@
 			<verse number="14">我的良人哪，求你快來！如羚羊或小鹿在香草山上。</verse>
 		</chapter>
 	</book>
-	<book id="23" shortName="賽" name="以賽亞書" pinyin="yisaiyashu">
+	<book id="23" shortName="賽" name="以賽亞書" pinyin="yisaiyashu" pinyinInitial="ysys">
 		<chapter number="1">
 			<verse number="1">當烏西雅、約坦、亞哈斯、希西家作猶大王的時候，亞摩斯的兒子以賽亞得默示，論到猶大和耶路撒冷。</verse>
 			<verse number="2">天哪，要聽！地啊，側耳而聽！因為耶和華說：我養育兒女，將他們養大，他們竟悖逆我。</verse>
@@ -20603,7 +20603,7 @@
 			<verse number="24">他們必出去觀看那些違背我人的屍首；因為他們的蟲是不死的；他們的火是不滅的；凡有血氣的都必憎惡他們。</verse>
 		</chapter>
 	</book>
-	<book id="24" shortName="耶" name="耶利米書" pinyin="yelimishu">
+	<book id="24" shortName="耶" name="耶利米書" pinyin="yelimishu" pinyinInitial="ylms">
 		<chapter number="1">
 			<verse number="1">便雅憫地亞拿突城的祭司中，希勒家的兒子耶利米的話記在下面。</verse>
 			<verse number="2">猶大王亞們的兒子約西亞在位十三年，耶和華的話臨到耶利米。</verse>
@@ -22073,7 +22073,7 @@
 			<verse number="34">巴比倫王賜他所需用的食物，日日賜他一分，終身是這樣，直到他死的日子。</verse>
 		</chapter>
 	</book>
-	<book id="25" shortName="哀" name="耶利米哀歌" pinyin="yelimiaige">
+	<book id="25" shortName="哀" name="耶利米哀歌" pinyin="yelimiaige" pinyinInitial="ylmag">
 		<chapter number="1">
 			<verse number="1">先前滿有人民的城，現在何竟獨坐！先前在列國中為大的，現在竟如寡婦；先前在諸省中為王后的，現在成為進貢的。</verse>
 			<verse number="2">他夜間痛哭，淚流滿腮；在一切所親愛的中間沒有一個安慰他的。他的朋友都以詭詐待他，成為他的仇敵。</verse>
@@ -22239,7 +22239,7 @@
 			<verse number="22">你竟全然棄絕我們，向我們大發烈怒？</verse>
 		</chapter>
 	</book>
-	<book id="26" shortName="結" name="以西結書" pinyin="yixijieshu">
+	<book id="26" shortName="結" name="以西結書" pinyin="yixijieshu" pinyinInitial="yxjs">
 		<chapter number="1">
 			<verse number="1">當三十年四月初五日，以西結（原文是我）在迦巴魯河邊被擄的人中，天就開了，得見神的異象。</verse>
 			<verse number="2">正是約雅斤王被擄去第五年四月初五日，</verse>
@@ -23610,7 +23610,7 @@
 			<verse number="35">城四圍共一萬八千肘。從此以後，這城的名字必稱為耶和華的所在。</verse>
 		</chapter>
 	</book>
-	<book id="27" shortName="結4" name="但以理書" pinyin="danyilishu">
+	<book id="27" shortName="結4" name="但以理書" pinyin="danyilishu" pinyinInitial="dyls">
 		<chapter number="1">
 			<verse number="1">猶大王約雅敬在位第三年，巴比倫王尼布甲尼撒來到耶路撒冷，將城圍困。</verse>
 			<verse number="2">主將猶大王約雅敬，並神殿中器皿的幾分交付他手。他就把這器皿帶到示拿地，收入他神的廟裡，放在他神的庫中。</verse>
@@ -23993,7 +23993,7 @@
 			<verse number="13">你且去等候結局，因為你必安歇。到了末期，你必起來，享受你的福分。</verse>
 		</chapter>
 	</book>
-	<book id="28" shortName="何" name="何西阿書" pinyin="hexiashu">
+	<book id="28" shortName="何" name="何西阿書" pinyin="hexiashu" pinyinInitial="hxas">
 		<chapter number="1">
 			<verse number="1">當烏西雅、約坦、亞哈斯、希西家作猶大王，約阿施的兒子耶羅波安作以色列王的時候，耶和華的話臨到備利的兒子何西阿。</verse>
 			<verse number="2">耶和華初次與何西阿說話，對他說：你去娶淫婦為妻，也收那從淫亂所生的兒女；因為這地大行淫亂，離棄耶和華。</verse>
@@ -24220,7 +24220,7 @@
 			<verse number="9">誰是智慧人，可以明白這些事；誰是通達人，可以知道這一切。因為，耶和華的道是正直的；義人必在其中行走，罪人卻在其上跌倒。</verse>
 		</chapter>
 	</book>
-	<book id="29" shortName="珥" name="約珥書" pinyin="yueershu">
+	<book id="29" shortName="珥" name="約珥書" pinyin="yueershu" pinyinInitial="yes">
 		<chapter number="1">
 			<verse number="1">耶和華的話臨到毘土珥的兒子約珥。</verse>
 			<verse number="2">老年人哪，當聽我的話；國中的居民哪，都要側耳而聽。在你們的日子，或你們列祖的日子，曾有這樣的事嗎？</verse>
@@ -24301,7 +24301,7 @@
 			<verse number="21">我未曾報復（或譯：洗除；下同）流血的罪，現在我要報復，因為耶和華住在錫安。</verse>
 		</chapter>
 	</book>
-	<book id="30" shortName="摩" name="阿摩司書" pinyin="amosishu">
+	<book id="30" shortName="摩" name="阿摩司書" pinyin="amosishu" pinyinInitial="eb">
 		<chapter number="1">
 			<verse number="1">當猶大王烏西雅，以色列王約阿施的兒子耶羅波安在位的時候，大地震前二年，提哥亞牧人中的阿摩司得默示論以色列。</verse>
 			<verse number="2">他說：耶和華必從錫安吼叫，從耶路撒冷發聲；牧人的草場要悲哀；迦密的山頂要枯乾。</verse>
@@ -24467,7 +24467,7 @@
 			<verse number="15">我要將他們栽於本地，他們不再從我所賜給他們的地上拔出來。這是耶和華─你的神說的。</verse>
 		</chapter>
 	</book>
-	<book id="31" shortName="俄" name="俄巴底亞書" pinyin="edibayashu">
+	<book id="31" shortName="俄" name="俄巴底亞書" pinyin="ebadiyashu" pinyinInitial="ebdys">
 		<chapter number="1">
 			<verse number="1">俄巴底亞得了耶和華的默示。論以東說：我從耶和華那裡聽見信息，並有使者被差往列國去，說：起來吧，一同起來與以東爭戰！</verse>
 			<verse number="2">我使你─以東在列國中為最小的，被人大大藐視。</verse>
@@ -24492,7 +24492,7 @@
 			<verse number="21">必有拯救者上到錫安山，審判以掃山；國度就歸耶和華了。</verse>
 		</chapter>
 	</book>
-	<book id="32" shortName="拿" name="約拿書" pinyin="yuenashu">
+	<book id="32" shortName="拿" name="約拿書" pinyin="yuenashu" pinyinInitial="yns">
 		<chapter number="1">
 			<verse number="1">耶和華的話臨到亞米太的兒子約拿，說：</verse>
 			<verse number="2">你起來往尼尼微大城去，向其中的居民呼喊，因為他們的惡達到我面前。</verse>
@@ -24550,7 +24550,7 @@
 			<verse number="11">何況這尼尼微大城，其中不能分辨左手右手的有十二萬多人，並有許多牲畜，我豈能不愛惜呢？</verse>
 		</chapter>
 	</book>
-	<book id="33" shortName="彌" name="彌迦書" pinyin="mijiashu">
+	<book id="33" shortName="彌" name="彌迦書" pinyin="mijiashu" pinyinInitial="mjs">
 		<chapter number="1">
 			<verse number="1">當猶大王約坦、亞哈斯、希西家在位的時候，摩利沙人彌迦得耶和華的默示，論撒瑪利亞和耶路撒冷。</verse>
 			<verse number="2">萬民哪，你們都要聽！地和其上所有的，也都要側耳而聽！主耶和華從他的聖殿要見證你們的不是。</verse>
@@ -24671,7 +24671,7 @@
 			<verse number="20">你必按古時起誓應許我們列祖的話，向雅各發誠實，向亞伯拉罕施慈愛。</verse>
 		</chapter>
 	</book>
-	<book id="34" shortName="鴻" name="那鴻書" pinyin="nahongshu">
+	<book id="34" shortName="鴻" name="那鴻書" pinyin="nahongshu" pinyinInitial="nhs">
 		<chapter number="1">
 			<verse number="1">論尼尼微的默示，就是伊勒歌斯人那鴻所得的默示。</verse>
 			<verse number="2">耶和華是忌邪施報的神。耶和華施報大有忿怒；向他的敵人施報，向他的仇敵懷怒。</verse>
@@ -24726,7 +24726,7 @@
 			<verse number="19">你的損傷無法醫治；你的傷痕極其重大。凡聽你信息的必都因此向你拍掌。你所行的惡誰沒有時常遭遇呢？</verse>
 		</chapter>
 	</book>
-	<book id="35" shortName="哈" name="哈巴谷書" pinyin="habagushu">
+	<book id="35" shortName="哈" name="哈巴谷書" pinyin="habagushu" pinyinInitial="hbgs">
 		<chapter number="1">
 			<verse number="1">先知哈巴谷所得的默示。</verse>
 			<verse number="2">他說：耶和華啊！我呼求你，你不應允，要到幾時呢？我因強暴哀求你，你還不拯救。</verse>
@@ -24790,7 +24790,7 @@
 			<verse number="19">主耶和華是我的力量；他使我的腳快如母鹿的蹄，又使我穩行在高處。這歌交與伶長，用絲弦的樂器。</verse>
 		</chapter>
 	</book>
-	<book id="36" shortName="番" name="西番雅書" pinyin="xifanyashu">
+	<book id="36" shortName="番" name="西番雅書" pinyin="xifanyashu" pinyinInitial="xfys">
 		<chapter number="1">
 			<verse number="1">當猶大王亞們的兒子約西亞在位的時候，耶和華的話臨到希西家的玄孫，亞瑪利雅的曾孫，基大利的孫子，古示的兒子西番雅。</verse>
 			<verse number="2">耶和華說：我必從地上除滅萬類。</verse>
@@ -24851,7 +24851,7 @@
 			<verse number="20">那時，我必領你們進來，聚集你們；我使你們被擄之人歸回的時候，就必使你們在地上的萬民中有名聲，得稱讚。這是耶和華說的。</verse>
 		</chapter>
 	</book>
-	<book id="37" shortName="該" name="哈該書" pinyin="hagaishu">
+	<book id="37" shortName="該" name="哈該書" pinyin="hagaishu" pinyinInitial="hgs">
 		<chapter number="1">
 			<verse number="1">大利烏王第二年六月初一日，耶和華的話藉先知哈該向猶大省長撒拉鐵的兒子所羅巴伯和約撒答的兒子大祭司約書亞說：</verse>
 			<verse number="2">萬軍之耶和華如此說：這百姓說，建造耶和華殿的時候尚未來到。</verse>
@@ -24895,7 +24895,7 @@
 			<verse number="23">萬軍之耶和華說：我僕人撒拉鐵的兒子所羅巴伯啊，到那日，我必以你為印，因我揀選了你。這是萬軍之耶和華說的。</verse>
 		</chapter>
 	</book>
-	<book id="38" shortName="亞" name="撒迦利亞書" pinyin="sajialiyashu">
+	<book id="38" shortName="亞" name="撒迦利亞書" pinyin="sajialiyashu" pinyinInitial="sjlys">
 		<chapter number="1">
 			<verse number="1">大利烏王第二年八月，耶和華的話臨到易多的孫子、比利家的兒子先知撒迦利亞，說：</verse>
 			<verse number="2">耶和華曾向你們列祖大大發怒。</verse>
@@ -25136,7 +25136,7 @@
 			<verse number="21">凡耶路撒冷和猶大的鍋都必歸萬軍之耶和華為聖。凡獻祭的都必來取這鍋，煮肉在其中。當那日，在萬軍之耶和華的殿中必不再有迦南人。</verse>
 		</chapter>
 	</book>
-	<book id="39" shortName="瑪" name="瑪拉基書" pinyin="malajishu">
+	<book id="39" shortName="瑪" name="瑪拉基書" pinyin="malajishu" pinyinInitial="mljs">
 		<chapter number="1">
 			<verse number="1">耶和華藉瑪拉基傳給以色列的默示。</verse>
 			<verse number="2">耶和華說：我曾愛你們。你們卻說：你在何事上愛我們呢？耶和華說：以掃不是雅各的哥哥嗎？我卻愛雅各，</verse>
@@ -25201,7 +25201,7 @@
 			<verse number="6">他必使父親的心轉向兒女，兒女的心轉向父親，免得我來咒詛遍地。</verse>
 		</chapter>
 	</book>
-	<book id="40" shortName="太" name="馬太福音" pinyin="mataifuyin">
+	<book id="40" shortName="太" name="馬太福音" pinyin="mataifuyin" pinyinInitial="mtfy">
 		<chapter number="1">
 			<verse number="1">亞伯拉罕的後裔，大衛的子孫（後裔，子孫：原文是兒子；下同）耶穌基督的家譜：</verse>
 			<verse number="2">亞伯拉罕生以撒；以撒生雅各；雅各生猶大和他的弟兄；</verse>
@@ -26330,7 +26330,7 @@
 			<verse number="20">凡我所吩咐你們的，都教訓他們遵守，我就常與你們同在，直到世界的末了。</verse>
 		</chapter>
 	</book>
-	<book id="41" shortName="可" name="馬可福音" pinyin="makefuyin">
+	<book id="41" shortName="可" name="馬可福音" pinyin="makefuyin" pinyinInitial="mkfy">
 		<chapter number="1">
 			<verse number="1">神的兒子，耶穌基督福音的起頭。</verse>
 			<verse number="2">正如先知以賽亞（有古卷無以賽亞三個字）書上記著說：看哪，我要差遣我的使者在你前面，預備道路。</verse>
@@ -27042,7 +27042,7 @@
 			<verse number="20">門徒出去，到處宣傳福音。主和他們同工，用神蹟隨著，證實所傳的道。阿們！</verse>
 		</chapter>
 	</book>
-	<book id="42" shortName="路" name="路加福音" pinyin="lujiafuyin">
+	<book id="42" shortName="路" name="路加福音" pinyin="lujiafuyin" pinyinInitial="ljfy">
 		<chapter number="1">
 			<verse number="1">提阿非羅大人哪，有好些人提筆作書，述說在我們中間所成就的事，是照傳道的人從起初親眼看見又傳給我們的。</verse>
 			<verse number="2">併於上節。</verse>
@@ -28243,7 +28243,7 @@
 			<verse number="53">常在殿裡稱頌神。</verse>
 		</chapter>
 	</book>
-	<book id="43" shortName="約" name="約翰福音" pinyin="yuehanfuyin">
+	<book id="43" shortName="約" name="約翰福音" pinyin="yuehanfuyin" pinyinInitial="yhfy">
 		<chapter number="1">
 			<verse number="1">太初有道，道與神同在，道就是神。</verse>
 			<verse number="2">這道太初與神同在。</verse>
@@ -29166,7 +29166,7 @@
 			<verse number="25">耶穌所行的事還有許多，若是一一的都寫出來，我想，所寫的書就是世界也容不下了。</verse>
 		</chapter>
 	</book>
-	<book id="44" shortName="徒" name="使徒行傳" pinyin="shituxingzhuan">
+	<book id="44" shortName="徒" name="使徒行傳" pinyin="shituxingzhuan" pinyinInitial="stxz">
 		<chapter number="1">
 			<verse number="1">提阿非羅啊，我已經作了前書，論到耶穌開頭一切所行所教訓的，</verse>
 			<verse number="2">直到他藉著聖靈吩咐所揀選的使徒，以後被接上升的日子為止。</verse>
@@ -30231,7 +30231,7 @@
 			<verse number="31">放膽傳講神國的道，將主耶穌基督的事教導人，並沒有人禁止。</verse>
 		</chapter>
 	</book>
-	<book id="45" shortName="羅" name="羅馬書" pinyin="lomashu">
+	<book id="45" shortName="羅" name="羅馬書" pinyin="lomashu" pinyinInitial="lms">
 		<chapter number="1">
 			<verse number="1">耶穌基督的僕人保羅，奉召為使徒，特派傳神的福音。</verse>
 			<verse number="2">這福音是神從前藉眾先知在聖經上所應許的，</verse>
@@ -30698,7 +30698,7 @@
 			<verse number="27">願榮耀因耶穌基督歸與獨一全智的神，直到永遠。阿們！</verse>
 		</chapter>
 	</book>
-	<book id="46" shortName="林前" name="哥林多前書" pinyin="gelinduoqianshu">
+	<book id="46" shortName="林前" name="哥林多前書" pinyin="gelinduoqianshu" pinyinInitial="gldqs">
 		<chapter number="1">
 			<verse number="1">奉神旨意，蒙召作耶穌基督使徒的保羅，同兄弟所提尼，</verse>
 			<verse number="2">寫信給在哥林多神的教會，就是在基督耶穌裡成聖、蒙召作聖徒的，以及所有在各處求告我主耶穌基督之名的人。基督是他們的主，也是我們的主。</verse>
@@ -31169,7 +31169,7 @@
 			<verse number="24">我在基督耶穌裡的愛與你們眾人同在。阿們！</verse>
 		</chapter>
 	</book>
-	<book id="47" shortName="林後" name="哥林多後書" pinyin="gelinduohoushu">
+	<book id="47" shortName="林後" name="哥林多後書" pinyin="gelinduohoushu" pinyinInitial="gldhs">
 		<chapter number="1">
 			<verse number="1">奉神旨意作基督耶穌使徒的保羅和兄弟提摩太，寫信給在哥林多神的教會，並亞該亞遍處的眾聖徒。</verse>
 			<verse number="2">願恩惠、平安從神我們的父和主耶穌基督歸與你們！</verse>
@@ -31454,7 +31454,7 @@
 			<verse number="14">願主耶穌基督的恩惠、神的慈愛、聖靈的感動，常與你們眾人同在！</verse>
 		</chapter>
 	</book>
-	<book id="48" shortName="加" name="加拉太書" pinyin="jialataishu">
+	<book id="48" shortName="加" name="加拉太書" pinyin="jialataishu" pinyinInitial="jlts">
 		<chapter number="1">
 			<verse number="1">作使徒的保羅（不是由於人，也不是藉著人，乃是藉著耶穌基督，與叫他從死裡復活的父神）</verse>
 			<verse number="2">和一切與我同在的眾弟兄，寫信給加拉太的各教會。</verse>
@@ -31617,7 +31617,7 @@
 			<verse number="18">弟兄們，願我主耶穌基督的恩常在你們心裡。阿們！</verse>
 		</chapter>
 	</book>
-	<book id="49" shortName="弗" name="以弗所書" pinyin="yifusuoshu">
+	<book id="49" shortName="弗" name="以弗所書" pinyin="yifusuoshu" pinyinInitial="yfss">
 		<chapter number="1">
 			<verse number="1">奉神旨意，作基督耶穌使徒的保羅，寫信給在以弗所的聖徒，就是在基督耶穌裡有忠心的人。</verse>
 			<verse number="2">願恩惠、平安從神我們的父和主耶穌基督歸與你們！</verse>
@@ -31786,7 +31786,7 @@
 			<verse number="24">並願所有誠心愛我們主耶穌基督的人都蒙恩惠！</verse>
 		</chapter>
 	</book>
-	<book id="50" shortName="腓" name="腓立比書" pinyin="weilibishu">
+	<book id="50" shortName="腓" name="腓立比書" pinyin="weilibishu" pinyinInitial="ylbs">
 		<chapter number="1">
 			<verse number="1">基督耶穌的僕人保羅和提摩太寫信給凡住腓立比、在基督耶穌裡的眾聖徒，和諸位監督，諸位執事。</verse>
 			<verse number="2">願恩惠、平安從神我們的父並主耶穌基督歸與你們！</verse>
@@ -31900,7 +31900,7 @@
 			<verse number="23">願主耶穌基督的恩常在你們心裡！</verse>
 		</chapter>
 	</book>
-	<book id="51" shortName="西" name="歌羅西書" pinyin="geluoxishu">
+	<book id="51" shortName="西" name="歌羅西書" pinyin="geluoxishu" pinyinInitial="glxs">
 		<chapter number="1">
 			<verse number="1">奉神旨意，作基督耶穌使徒的保羅和兄弟提摩太</verse>
 			<verse number="2">寫信給歌羅西的聖徒，在基督裡有忠心的弟兄。願恩惠、平安從神我們的父歸與你們！</verse>
@@ -32005,7 +32005,7 @@
 			<verse number="18">我保羅親筆問你們安。你們要記念我的捆鎖。願恩惠常與你們同在！</verse>
 		</chapter>
 	</book>
-	<book id="52" shortName="帖前" name="帖撒羅尼迦前書" pinyin="tiesaluonijiaqianshu">
+	<book id="52" shortName="帖前" name="帖撒羅尼迦前書" pinyin="tiesaluonijiaqianshu" pinyinInitial="tslnjqs">
 		<chapter number="1">
 			<verse number="1">保羅、西拉、提摩太寫信給帖撒羅尼迦在父神和主耶穌基督裡的教會。願恩惠平安歸與你們！</verse>
 			<verse number="2">我們為你們眾人常常感謝神，禱告的時候提到你們，</verse>
@@ -32106,7 +32106,7 @@
 			<verse number="28">願我主耶穌基督的恩常與你們同在！</verse>
 		</chapter>
 	</book>
-	<book id="53" shortName="帖後" name="帖撒羅尼迦後書" pinyin="tiesaluonijiahoushu">
+	<book id="53" shortName="帖後" name="帖撒羅尼迦後書" pinyin="tiesaluonijiahoushu" pinyinInitial="tslnjhs">
 		<chapter number="1">
 			<verse number="1">保羅、西拉、提摩太寫信給帖撒羅尼迦在神我們的父與主耶穌基督裡的教會。</verse>
 			<verse number="2">願恩惠、平安從父神和主耶穌基督歸與你們！</verse>
@@ -32161,7 +32161,7 @@
 			<verse number="18">願我們主耶穌基督的恩常與你們眾人同在！</verse>
 		</chapter>
 	</book>
-	<book id="54" shortName="提前" name="提摩太前書" pinyin="timotaiqianshu">
+	<book id="54" shortName="提前" name="提摩太前書" pinyin="timotaiqianshu" pinyinInitial="tmtqs">
 		<chapter number="1">
 			<verse number="1">奉我們救主神和我們的盼望基督耶穌之命，作基督耶穌使徒的保羅，</verse>
 			<verse number="2">寫信給那因信主作我真兒子的提摩太。願恩惠、憐憫、平安從父神和我們主基督耶穌歸與你！</verse>
@@ -32288,7 +32288,7 @@
 			<verse number="21">已經有人自稱有這學問，就偏離了真道。願恩惠常與你們同在！</verse>
 		</chapter>
 	</book>
-	<book id="55" shortName="提後" name="提摩太後書" pinyin="timotaihoushu">
+	<book id="55" shortName="提後" name="提摩太後書" pinyin="timotaihoushu" pinyinInitial="tmths">
 		<chapter number="1">
 			<verse number="1">奉神旨意，照著在基督耶穌裡生命的應許，作基督耶穌使徒的保羅，</verse>
 			<verse number="2">寫信給我親愛的兒子提摩太。願恩惠、憐憫、平安從父神和我們主基督耶穌歸與你！</verse>
@@ -32381,7 +32381,7 @@
 			<verse number="22">願主與你的靈同在。願恩惠常與你們同在！</verse>
 		</chapter>
 	</book>
-	<book id="56" shortName="多" name="提多書" pinyin="tiduoshu">
+	<book id="56" shortName="多" name="提多書" pinyin="tiduoshu" pinyinInitial="tds">
 		<chapter number="1">
 			<verse number="1">神的僕人，耶穌基督的使徒保羅，憑著神選民的信心與敬虔真理的知識，</verse>
 			<verse number="2">盼望那無謊言的神在萬古之先所應許的永生，</verse>
@@ -32435,7 +32435,7 @@
 			<verse number="15">同我在一處的人都問你安。請代問那些因有信心愛我們的人安。願恩惠常與你們眾人同在！</verse>
 		</chapter>
 	</book>
-	<book id="57" shortName="門" name="腓利門書" pinyin="feilimenshu">
+	<book id="57" shortName="門" name="腓利門書" pinyin="feilimenshu" pinyinInitial="flms">
 		<chapter number="1">
 			<verse number="1">為基督耶穌被囚的保羅，同兄弟提摩太寫信給我們所親愛的同工腓利門，</verse>
 			<verse number="2">和妹子亞腓亞並與我們同當兵的亞基布，以及在你家的教會。</verse>
@@ -32464,7 +32464,7 @@
 			<verse number="25">願我們主耶穌基督的恩常在你的心裡。阿們！</verse>
 		</chapter>
 	</book>
-	<book id="58" shortName="來" name="希伯來書" pinyin="xibolaishu">
+	<book id="58" shortName="來" name="希伯來書" pinyin="xibolaishu" pinyinInitial="xbls">
 		<chapter number="1">
 			<verse number="1">神既在古時藉著眾先知多次多方的曉諭列祖，</verse>
 			<verse number="2">就在這末世藉著他兒子曉諭我們；又早已立他為承受萬有的，也曾藉著他創造諸世界。</verse>
@@ -32795,7 +32795,7 @@
 			<verse number="25">願恩惠常與你們眾人同在。阿們！</verse>
 		</chapter>
 	</book>
-	<book id="59" shortName="雅" name="雅各書" pinyin="yageshu">
+	<book id="59" shortName="雅" name="雅各書" pinyin="yageshu" pinyinInitial="ygs">
 		<chapter number="1">
 			<verse number="1">作神和主耶穌基督僕人的雅各請散住十二個支派之人的安。</verse>
 			<verse number="2">我的弟兄們，你們落在百般試煉中，都要以為大喜樂；</verse>
@@ -32915,7 +32915,7 @@
 			<verse number="20">這人該知道：叫一個罪人從迷路上轉回便是救一個靈魂不死，並且遮蓋許多的罪。</verse>
 		</chapter>
 	</book>
-	<book id="60" shortName="彼前" name="彼得前書" pinyin="bideqianshu">
+	<book id="60" shortName="彼前" name="彼得前書" pinyin="bideqianshu" pinyinInitial="bdqs">
 		<chapter number="1">
 			<verse number="1">耶穌基督的使徒彼得寫信給那分散在本都、加拉太、加帕多家、亞西亞、庇推尼寄居的，</verse>
 			<verse number="2">就是照父神的先見被揀選、藉著聖靈得成聖潔，以致順服耶穌基督，又蒙他血所灑的人。願恩惠、平安多多的加給你們。</verse>
@@ -33032,7 +33032,7 @@
 			<verse number="14">你們要用愛心彼此親嘴問安。願平安歸與你們凡在基督裡的人！</verse>
 		</chapter>
 	</book>
-	<book id="61" shortName="彼後" name="彼得後書" pinyin="bidehoushu">
+	<book id="61" shortName="彼後" name="彼得後書" pinyin="bidehoushu" pinyinInitial="bdhs">
 		<chapter number="1">
 			<verse number="1">作耶穌基督僕人和使徒的西門彼得寫信給那因我們的神和（有古卷沒有和字）救主耶穌基督之義，與我們同得一樣寶貴信心的人。</verse>
 			<verse number="2">願恩惠、平安因你們認識神和我們主耶穌多多的加給你們。</verse>
@@ -33101,7 +33101,7 @@
 			<verse number="18">你們卻要在我們主─救主耶穌基督的恩典和知識上有長進。願榮耀歸給他，從今直到永遠。阿們！</verse>
 		</chapter>
 	</book>
-	<book id="62" shortName="約一" name="約翰一書" pinyin="yuehanyishu">
+	<book id="62" shortName="約一" name="約翰一書" pinyin="yuehanyishu" pinyinInitial="yhys">
 		<chapter number="1">
 			<verse number="1">論到從起初原有的生命之道，就是我們所聽見、所看見、親眼看過、親手摸過的。</verse>
 			<verse number="2">（這生命已經顯現出來，我們也看見過，現在又作見證，將原與父同在、且顯現與我們那永遠的生命、傳給你們。）</verse>
@@ -33218,7 +33218,7 @@
 			<verse number="21">小子們哪，你們要自守，遠避偶像！</verse>
 		</chapter>
 	</book>
-	<book id="63" shortName="約二" name="約翰二書" pinyin="yuehanershu">
+	<book id="63" shortName="約二" name="約翰二書" pinyin="yuehanershu" pinyinInitial="yhes">
 		<chapter number="1">
 			<verse number="1">作長老的寫信給蒙揀選的太太（或作：教會；下同），和他的兒女，就是我誠心所愛的；不但我愛，也是一切知道真理之人所愛的。</verse>
 			<verse number="2">愛你們是為真理的緣故，這真理存在我們裡面，也必永遠與我們同在。</verse>
@@ -33235,7 +33235,7 @@
 			<verse number="13">你那蒙揀選之姊妹的兒女都問你安。</verse>
 		</chapter>
 	</book>
-	<book id="64" shortName="約三" name="約翰三書" pinyin="yuehansanshu">
+	<book id="64" shortName="約三" name="約翰三書" pinyin="yuehansanshu" pinyinInitial="yhss">
 		<chapter number="1">
 			<verse number="1">作長老的寫信給親愛的該猶，就是我誠心所愛的。</verse>
 			<verse number="2">親愛的兄弟啊，我願你凡事興盛，身體健壯，正如你的靈魂興盛一樣。</verse>
@@ -33254,7 +33254,7 @@
 			<verse number="15">願你平安。眾位朋友都問你安。請你替我按著姓名問眾位朋友安。</verse>
 		</chapter>
 	</book>
-	<book id="65" shortName="猶" name="猶大書" pinyin="youdashu">
+	<book id="65" shortName="猶" name="猶大書" pinyin="youdashu" pinyinInitial="yds">
 		<chapter number="1">
 			<verse number="1">耶穌基督的僕人，雅各的弟兄猶大，寫信給那被召、在父神裡蒙愛、為耶穌基督保守的人。</verse>
 			<verse number="2">願憐恤、平安、慈愛多多的加給你們。</verse>
@@ -33283,7 +33283,7 @@
 			<verse number="25">願榮耀、威嚴、能力、權柄，因我們的主耶穌基督歸與他，從萬古以前並現今，直到永永遠遠。阿們。</verse>
 		</chapter>
 	</book>
-	<book id="66" shortName="啟" name="啟示錄" pinyin="qishilu">
+	<book id="66" shortName="啟" name="啟示錄" pinyin="qishilu" pinyinInitial="qsl">
 		<chapter number="1">
 			<verse number="1">耶穌基督的啟示，就是神賜給他，叫他將必要快成的事指示他的眾僕人。他就差遣使者曉諭他的僕人約翰。</verse>
 			<verse number="2">約翰便將神的道和耶穌基督的見證，凡自己所看見的都證明出來。</verse>

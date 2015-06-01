@@ -354,6 +354,9 @@ $(function() {
 		if (event.which == 72 || event.which == 104) { // bind 'h' and 'H' key to toggle help menu
 			$('#questionButton').click();
 		}
+		if (event.which == 32) { // bind space key to scroll to top
+			$("html, body").animate({scrollTop:0}, '500', 'swing');
+		}
 	});
 
 	// bind up and down arrow key events to move from rows to rows in autocomlete list
